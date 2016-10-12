@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.WebService.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
                 } else {
+                    GameService.shared().create();
                     startActivity(intent);
                 }
             }
