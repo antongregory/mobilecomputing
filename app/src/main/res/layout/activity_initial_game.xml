@@ -13,13 +13,13 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="541dp">
+        android:layout_height="match_parent">
 
         <ImageView
             app:srcCompat="@mipmap/logo"
             android:id="@+id/app_logo"
             android:adjustViewBounds="false"
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="150dp"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="20dp" />
