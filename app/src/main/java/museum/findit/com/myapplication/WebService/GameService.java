@@ -97,35 +97,39 @@ public class GameService {
         });
     }
 
-    public Task<String> listenStarted(){
-        final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
+    public void listenGameStatusChanged(ValueEventListener gameStatusListener){
         final DatabaseReference statusDatabase = gamesDatabase.child(gameId).child("status");
-        statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String gameStatus = dataSnapshot.getValue(String.class);
-                Log.d("GameLog", "Game status is: " + gameStatus);
-
-                if ("started".equals(gameStatus)) {
-                    taskCompletionSource.setResult(gameId);
-                } else {
-                    taskCompletionSource.setException(new Exception("game already " + gameStatus));
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("GameLog", "Failed to read value.", error.toException());
-                taskCompletionSource.setException(new Exception("status can't be read"));
-            }
-        });
-
-        return taskCompletionSource.getTask();
+        statusDatabase.addValueEventListener(gameStatusListener);
     }
 
     public void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
         numberOfPlayersDatabase.addValueEventListener(numberOfPlayersListener);
+    }
+
+    public void leave(){
+        final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
+        numberOfPlayersDatabase.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Integer numberOfPlayers = mutableData.getValue(Integer.class);
+                if (numberOfPlayers == null){
+                    return Transaction.success(mutableData);
+                }
+
+                numberOfPlayers -= 1;
+                mutableData.setValue(numberOfPlayers);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                Log.d("GameLog", "leave:onComplete:" + databaseError);
+            }
+        });
+    }
+
+    public void cancel(){
+        gamesDatabase.child(gameId).child("status").setValue("cancelled");
     }
 }

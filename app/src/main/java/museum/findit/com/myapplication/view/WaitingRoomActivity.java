@@ -32,15 +32,21 @@ public class WaitingRoomActivity extends AppCompatActivity {
         String message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
         welcomeInfo.setText("Welcome "+message+"!");
-        GameService.shared().listenStarted().addOnCompleteListener(new OnCompleteListener<String>() {
+        GameService.shared().listenGameStatusChanged(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if(task.isSuccessful()){
-                    // TODO: move to game screen
-                } else {
-                    Toast.makeText(WaitingRoomActivity.this, "Game is cancelled", Toast.LENGTH_SHORT).show();
-                    // TODO: move to login screen
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String gameStatus = dataSnapshot.getValue(String.class);
+
+                if("started".equals(gameStatus)){
+                    startGame();
+                } else if ("cancelled".equals(gameStatus)){
+                    finish();
                 }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w("GameLog","Failed to read value.", error.toException());
             }
         });
 
@@ -61,17 +67,19 @@ public class WaitingRoomActivity extends AppCompatActivity {
     }
 
     public void backToLogin(View view) {
+        GameService.shared().leave();
        finish();
     }
 
 
      public void startGame(View view){
-         Intent intent = new Intent(this, GameActiviry.class);
-
          GameService.shared().start();
-         startActivity(intent);
+         startGame();
      }
 
-
+    private void startGame(){
+        Intent intent = new Intent(this, GameActiviry.class);
+        startActivity(intent);
+    }
 
 }
