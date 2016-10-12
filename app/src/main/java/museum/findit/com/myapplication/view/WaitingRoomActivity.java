@@ -3,11 +3,18 @@ package museum.findit.com.myapplication.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameOwnerService;
+import museum.findit.com.myapplication.WebService.GameParticipantService;
+import museum.findit.com.myapplication.WebService.GameService;
 
 public class WaitingRoomActivity extends AppCompatActivity {
 
@@ -24,18 +31,56 @@ public class WaitingRoomActivity extends AppCompatActivity {
 
         welcomeInfo.setText("Welcome "+message+"!");
 
+//        // TODO: check if player is participant
+//        GameParticipantService.listenGameStatusChanged(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String gameStatus = dataSnapshot.getValue(String.class);
+//
+//                if("started".equals(gameStatus)){
+//                    startGame();
+//                } else if ("cancelled".equals(gameStatus)){
+//                    finish();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                Log.w("GameLog","Failed to read value.", error.toException());
+//            }
+//        });
+//
+//        GameService.listenNumberOfPlayers(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                Integer numberOfPlayers = dataSnapshot.getValue(Integer.class);
+//                Log.d("GameLog", "Number of players is: " + numberOfPlayers);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w("GameLog", "Failed to read value.", error.toException());
+//            }
+//        });
     }
 
     public void backToLogin(View view) {
+//        // TODO: check if user is participant, otherwise use GameOwnerService.cancel()
+//        GameParticipantService.leave();
        finish();
     }
 
 
      public void startGame(View view){
-         Intent intent = new Intent(this, GameActiviry.class);
-          startActivity(intent);
+//         GameOwnerService.start();
+         startGame();
      }
 
-
+    private void startGame(){
+        Intent intent = new Intent(this, GameActiviry.class);
+        startActivity(intent);
+    }
 
 }
