@@ -8,6 +8,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import museum.findit.com.myapplication.Helpers.RandomIdGenerator;
@@ -33,7 +35,9 @@ public class GameService {
 
     public void create(){
         gameId = RandomIdGenerator.GetBase36(6);
-        gamesDatabase.child(gameId).child("status").setValue("opened");
+        DatabaseReference gameDatabase = gamesDatabase.child(gameId);
+        gameDatabase.child("status").setValue("opened");
+        gameDatabase.child("numberOfPlayers").setValue(1);
     }
 
     public void start(){
@@ -53,6 +57,7 @@ public class GameService {
 
                 if ("opened".equals(gameStatus)) {
                     gameId = joinGameId;
+                    gameJoined();
                     taskCompletionSource.setResult(joinGameId);
                 } else {
                     taskCompletionSource.setException(new Exception("game already " + gameStatus));
@@ -68,6 +73,28 @@ public class GameService {
         });
 
         return taskCompletionSource.getTask();
+    }
+
+    private void gameJoined(){
+        final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
+        numberOfPlayersDatabase.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Integer numberOfPlayers = mutableData.getValue(Integer.class);
+                if (numberOfPlayers == null){
+                    return Transaction.success(mutableData);
+                }
+
+                numberOfPlayers += 1;
+                mutableData.setValue(numberOfPlayers);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                Log.d("GameLog", "gameJoined:onComplete:" + databaseError);
+            }
+        });
     }
 
     public Task<String> listenStarted(){
@@ -95,5 +122,10 @@ public class GameService {
         });
 
         return taskCompletionSource.getTask();
+    }
+
+    public void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
+        final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
+        numberOfPlayersDatabase.addValueEventListener(numberOfPlayersListener);
     }
 }

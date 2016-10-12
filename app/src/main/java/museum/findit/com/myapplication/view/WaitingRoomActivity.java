@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameService;
@@ -37,6 +41,21 @@ public class WaitingRoomActivity extends AppCompatActivity {
                     Toast.makeText(WaitingRoomActivity.this, "Game is cancelled", Toast.LENGTH_SHORT).show();
                     // TODO: move to login screen
                 }
+            }
+        });
+
+        GameService.shared().listenNumberOfPlayers(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Integer numberOfPlayers = dataSnapshot.getValue(Integer.class);
+                Log.d("GameLog", "Number of players is: " + numberOfPlayers);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("GameLog", "Failed to read value.", error.toException());
             }
         });
     }
