@@ -1,5 +1,7 @@
 package museum.findit.com.myapplication.WebService;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 /**
@@ -16,7 +18,11 @@ public class LoginService {
         return singleton;
     }
 
-    public void login(){
-        FirebaseAuth.getInstance().signInAnonymously();
+    public Task<AuthResult> login(){
+        return FirebaseAuth.getInstance().signInAnonymously();
+    }
+
+    public String getId(){
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 }
