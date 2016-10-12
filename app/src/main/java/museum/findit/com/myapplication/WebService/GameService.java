@@ -45,7 +45,7 @@ public class GameService {
     public Task<String> join(final String joinGameId){
         final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
         final DatabaseReference statusDatabase = gamesDatabase.child(joinGameId).child("status");
-        statusDatabase.addValueEventListener(new ValueEventListener() {
+        statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String gameStatus = dataSnapshot.getValue(String.class);
@@ -55,7 +55,6 @@ public class GameService {
                     gameId = joinGameId;
                     taskCompletionSource.setResult(joinGameId);
                 } else {
-                    statusDatabase.removeEventListener(this);
                     taskCompletionSource.setException(new Exception("game already " + gameStatus));
                 }
             }
@@ -64,7 +63,33 @@ public class GameService {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("GameLog", "Failed to read value.", error.toException());
-                statusDatabase.removeEventListener(this);
+                taskCompletionSource.setException(new Exception("status can't be read"));
+            }
+        });
+
+        return taskCompletionSource.getTask();
+    }
+
+    public Task<String> listenStarted(){
+        final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
+        final DatabaseReference statusDatabase = gamesDatabase.child(gameId).child("status");
+        statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String gameStatus = dataSnapshot.getValue(String.class);
+                Log.d("GameLog", "Game status is: " + gameStatus);
+
+                if ("started".equals(gameStatus)) {
+                    taskCompletionSource.setResult(gameId);
+                } else {
+                    taskCompletionSource.setException(new Exception("game already " + gameStatus));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("GameLog", "Failed to read value.", error.toException());
                 taskCompletionSource.setException(new Exception("status can't be read"));
             }
         });
