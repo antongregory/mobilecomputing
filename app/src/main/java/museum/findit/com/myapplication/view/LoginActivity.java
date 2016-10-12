@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void enterWaitingRoom(View view) {
         final Intent intent = new Intent(this, WaitingRoomActivity.class);
-        String name = userName.getText().toString();
+        final String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
         LoginService.shared().login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -47,8 +47,18 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    GameService.shared().create();
-                    startActivity(intent);
+//                    GameService.shared().create();
+                    GameService.shared().join(name).addOnCompleteListener(new OnCompleteListener<String>() {
+                        @Override
+                        public void onComplete(@NonNull Task<String> task) {
+                            if (task.isSuccessful()){
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Join game failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             }
         });
