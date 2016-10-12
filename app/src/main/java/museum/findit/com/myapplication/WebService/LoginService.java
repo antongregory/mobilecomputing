@@ -9,20 +9,11 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class LoginService {
-    private static LoginService singleton = null;
-    private LoginService() {  }
-    public static LoginService shared() {
-        if (singleton == null) {
-            singleton = new LoginService();
-        }
-        return singleton;
-    }
-
-    public Task<AuthResult> login(){
+    public static Task<AuthResult> login(){
         return FirebaseAuth.getInstance().signInAnonymously();
     }
 
-    public String getId(){
+    public static String getId(){
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 }

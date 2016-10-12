@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, WaitingRoomActivity.class);
         final String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
-        LoginService.shared().login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        LoginService.login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 Log.d("UserLog", "signInAnonymously:onComplete:" + task.isSuccessful());
