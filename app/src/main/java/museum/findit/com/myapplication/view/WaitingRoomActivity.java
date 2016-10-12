@@ -2,20 +2,18 @@ package museum.findit.com.myapplication.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameOwnerService;
+import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.GameService;
 
 public class WaitingRoomActivity extends AppCompatActivity {
@@ -32,7 +30,9 @@ public class WaitingRoomActivity extends AppCompatActivity {
         String message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
         welcomeInfo.setText("Welcome "+message+"!");
-        GameService.listenGameStatusChanged(new ValueEventListener() {
+
+        // TODO: check if player is participant
+        GameParticipantService.listenGameStatusChanged(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String gameStatus = dataSnapshot.getValue(String.class);
@@ -67,13 +67,14 @@ public class WaitingRoomActivity extends AppCompatActivity {
     }
 
     public void backToLogin(View view) {
-        GameService.leave();
+        // TODO: check if user is participant, otherwise use GameOwnerService.cancel()
+        GameParticipantService.leave();
        finish();
     }
 
 
      public void startGame(View view){
-         GameService.start();
+         GameOwnerService.start();
          startGame();
      }
 

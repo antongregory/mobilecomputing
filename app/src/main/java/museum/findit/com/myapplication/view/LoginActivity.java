@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import museum.findit.com.myapplication.R;
-import museum.findit.com.myapplication.WebService.GameService;
+import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
 //                    GameService.shared().create();
-                    GameService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
+                    GameParticipantService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
                         public void onComplete(@NonNull Task<String> task) {
                             if (task.isSuccessful()){
