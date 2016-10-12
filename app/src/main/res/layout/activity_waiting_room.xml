@@ -36,13 +36,23 @@
             android:text="@string/waitingInfo"
             android:layout_marginTop="10dp" />
 
+        <TextView
+            android:text="Game Code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gameCode"
+            android:layout_margin="30dp"
+            android:textStyle="normal|bold"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="24sp" />
+
         <GridLayout
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_marginTop="10dp"
             android:columnCount="2"
             android:clickable="false"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:keepScreenOn="false"
             android:weightSum="4">
@@ -143,14 +153,16 @@
             android:layout_height="match_parent">
 
             <Button
-                android:text="Start*"
+                android:text="Start"
                 android:layout_height="40dp"
                 android:id="@+id/startbtn"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:onClick="startGame"
                 android:textSize="18sp"
-                android:layout_width="150dp" />
+                android:layout_width="150dp"
+                android:background="@android:color/holo_green_light"
+                android:layout_marginRight="5dp" />
 
             <Button
                 android:text="Leave"
@@ -161,7 +173,8 @@
                 android:onClick="backToLogin"
                 android:layout_weight="1"
                 android:layout_height="40dp"
-                android:layout_width="150dp" />
+                android:layout_width="150dp"
+                android:layout_marginLeft="5dp" />
         </LinearLayout>
 
     </LinearLayout>

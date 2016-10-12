@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="museum.findit.com.myapplication.view.LoginActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ImageView
             app:srcCompat="@mipmap/logo"
@@ -26,7 +25,7 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/username"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="60dp"
             android:layout_marginLeft="60dp"
             android:hint = "Enter your name"/>
@@ -35,10 +34,14 @@
             android:text="Enter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="80dp"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
-            android:onClick="enterWaitingRoom"/>
+            android:onClick="enterWaitingRoom (LoginActivity)"
+            android:background="@android:color/holo_green_light"
+            android:textSize="18sp"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="normal|bold" />
 
     </LinearLayout>
 

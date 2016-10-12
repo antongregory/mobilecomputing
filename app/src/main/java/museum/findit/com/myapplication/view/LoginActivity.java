@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void enterWaitingRoom(View view) {
-        final Intent intent = new Intent(this, WaitingRoomActivity.class);
+        final Intent intent = new Intent(this, InitialGameActiviry.class);
         final String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
         LoginService.shared().login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
 }
