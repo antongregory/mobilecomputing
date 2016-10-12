@@ -37,7 +37,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginLeft="100dp"
             android:layout_marginRight="100dp"
-            android:onClick="enterWaitingRoom (LoginActivity)"
+            android:onClick="enterWaitingRoom"
             android:background="@android:color/holo_green_light"
             android:textSize="18sp"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
