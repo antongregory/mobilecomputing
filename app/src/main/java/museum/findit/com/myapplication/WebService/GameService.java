@@ -19,19 +19,10 @@ import museum.findit.com.myapplication.Helpers.RandomIdGenerator;
  */
 
 public class GameService {
-    private static GameService singleton = null;
-    private GameService() {  }
-    public static GameService shared() {
-        if (singleton == null) {
-            singleton = new GameService();
-        }
-        return singleton;
-    }
-
-    private DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("games");
+    private static DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("games");
 
     // TODO: gameId should be persistence even when app is turned off
-    private String gameId;
+    private static String gameId;
 
     public void create(){
         gameId = RandomIdGenerator.GetBase36(6);
@@ -40,13 +31,13 @@ public class GameService {
         gameDatabase.child("numberOfPlayers").setValue(1);
     }
 
-    public void start(){
+    public static void start(){
 
         // TODO: should check whether the number of players is more than 1
         gamesDatabase.child(gameId).child("status").setValue("started");
     }
 
-    public Task<String> join(final String joinGameId){
+    public static Task<String> join(final String joinGameId){
         final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
         final DatabaseReference statusDatabase = gamesDatabase.child(joinGameId).child("status");
         statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -75,7 +66,7 @@ public class GameService {
         return taskCompletionSource.getTask();
     }
 
-    private void gameJoined(){
+    private static void gameJoined(){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
         numberOfPlayersDatabase.runTransaction(new Transaction.Handler() {
             @Override
@@ -97,17 +88,17 @@ public class GameService {
         });
     }
 
-    public void listenGameStatusChanged(ValueEventListener gameStatusListener){
+    public static void listenGameStatusChanged(ValueEventListener gameStatusListener){
         final DatabaseReference statusDatabase = gamesDatabase.child(gameId).child("status");
         statusDatabase.addValueEventListener(gameStatusListener);
     }
 
-    public void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
+    public static void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
         numberOfPlayersDatabase.addValueEventListener(numberOfPlayersListener);
     }
 
-    public void leave(){
+    public static void leave(){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
         numberOfPlayersDatabase.runTransaction(new Transaction.Handler() {
             @Override
@@ -129,7 +120,7 @@ public class GameService {
         });
     }
 
-    public void cancel(){
+    public static void cancel(){
         gamesDatabase.child(gameId).child("status").setValue("cancelled");
     }
 }

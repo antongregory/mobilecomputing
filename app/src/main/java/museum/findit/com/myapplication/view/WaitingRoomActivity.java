@@ -32,7 +32,7 @@ public class WaitingRoomActivity extends AppCompatActivity {
         String message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
 
         welcomeInfo.setText("Welcome "+message+"!");
-        GameService.shared().listenGameStatusChanged(new ValueEventListener() {
+        GameService.listenGameStatusChanged(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String gameStatus = dataSnapshot.getValue(String.class);
@@ -50,7 +50,7 @@ public class WaitingRoomActivity extends AppCompatActivity {
             }
         });
 
-        GameService.shared().listenNumberOfPlayers(new ValueEventListener() {
+        GameService.listenNumberOfPlayers(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -67,13 +67,13 @@ public class WaitingRoomActivity extends AppCompatActivity {
     }
 
     public void backToLogin(View view) {
-        GameService.shared().leave();
+        GameService.leave();
        finish();
     }
 
 
      public void startGame(View view){
-         GameService.shared().start();
+         GameService.start();
          startGame();
      }
 

@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 } else {
 //                    GameService.shared().create();
-                    GameService.shared().join(name).addOnCompleteListener(new OnCompleteListener<String>() {
+                    GameService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
                         public void onComplete(@NonNull Task<String> task) {
                             if (task.isSuccessful()){
