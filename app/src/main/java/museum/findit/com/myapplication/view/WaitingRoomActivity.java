@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameService;
 
 public class WaitingRoomActivity extends AppCompatActivity {
 
@@ -33,7 +34,9 @@ public class WaitingRoomActivity extends AppCompatActivity {
 
      public void startGame(View view){
          Intent intent = new Intent(this, GameActiviry.class);
-          startActivity(intent);
+
+         GameService.shared().start();
+         startActivity(intent);
      }
 
 

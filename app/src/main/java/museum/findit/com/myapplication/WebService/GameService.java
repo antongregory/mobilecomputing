@@ -24,8 +24,17 @@ public class GameService {
 
     private DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("games");
 
+    // TODO: gameId should be persistence even when app is turned off
+    private String gameId;
+
     public void create(){
-        String gameId = RandomIdGenerator.GetBase36(6);
+        gameId = RandomIdGenerator.GetBase36(6);
         gamesDatabase.child(gameId).child("status").setValue("open");
+    }
+
+    public void start(){
+
+        // TODO: should check whether the number of players is more than 1
+        gamesDatabase.child(gameId).child("status").setValue("start");
     }
 }
