@@ -34,34 +34,36 @@ public class LoginActivity extends AppCompatActivity {
         final Intent intent = new Intent(this, WaitingRoomActivity.class);
         final String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
-        LoginService.login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.d("UserLog", "signInAnonymously:onComplete:" + task.isSuccessful());
+        startActivity(intent);
 
-                // If sign in fails, display a message to the user. If sign in succeeds
-                // the auth state listener will be notified and logic to handle the
-                // signed in user can be handled in the listener.
-                if (!task.isSuccessful()) {
-                    Log.w("UserLog", "signInAnonymously", task.getException());
-                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show();
-                } else {
-//                    GameService.shared().create();
-                    GameParticipantService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
-                        @Override
-                        public void onComplete(@NonNull Task<String> task) {
-                            if (task.isSuccessful()){
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Join game failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
+//        LoginService.login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                Log.d("UserLog", "signInAnonymously:onComplete:" + task.isSuccessful());
+//
+//                // If sign in fails, display a message to the user. If sign in succeeds
+//                // the auth state listener will be notified and logic to handle the
+//                // signed in user can be handled in the listener.
+//                if (!task.isSuccessful()) {
+//                    Log.w("UserLog", "signInAnonymously", task.getException());
+//                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+//                            Toast.LENGTH_SHORT).show();
+//                } else {
+////                    GameService.shared().create();
+//                    GameParticipantService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<String> task) {
+//                            if (task.isSuccessful()){
+//                                startActivity(intent);
+//                            } else {
+//                                Toast.makeText(LoginActivity.this, "Join game failed.",
+//                                        Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
 }
