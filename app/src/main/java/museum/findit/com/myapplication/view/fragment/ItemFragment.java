@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 import museum.findit.com.myapplication.R;
 
 /**
@@ -21,6 +23,8 @@ public class ItemFragment extends Fragment {
 
 
     }
+
+
 
 
 }

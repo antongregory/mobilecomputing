@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import museum.findit.com.myapplication.R;
-import museum.findit.com.myapplication.view.WaitingRoomActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void enterWaitingRoom(View view) {
-        Intent intent = new Intent(this, WaitingRoomActivity.class);
+        Intent intent = new Intent(this, JoinGameActivity.class);
         String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
         startActivity(intent);

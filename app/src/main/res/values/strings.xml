@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Find It!</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="waitingInfo">Game will start automatically after 4 players joined </string>
+    <string name="waitingInfo">You can invite people to this game using the code</string>
     <string name="title_activity_game_activiry">GameActiviry</string>
     <string name="action_settings">Settings</string>
 </resources>

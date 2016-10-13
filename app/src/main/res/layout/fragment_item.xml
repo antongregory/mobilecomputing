@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:layout_marginTop="30dp"
-                android:onClick="startQuiz"/>
+                android:onClick="scanBarCode"/>
 
         </LinearLayout>
 
