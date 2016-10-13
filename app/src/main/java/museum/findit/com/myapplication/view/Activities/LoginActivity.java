@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.view;
+package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.view.WaitingRoomActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

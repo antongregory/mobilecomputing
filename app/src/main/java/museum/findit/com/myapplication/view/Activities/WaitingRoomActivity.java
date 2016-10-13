@@ -1,13 +1,14 @@
-package museum.findit.com.myapplication.view;
+package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.view.Activities.GameActiviry;
+import museum.findit.com.myapplication.view.Activities.LoginActivity;
 
 public class WaitingRoomActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.view;
+package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 
 import museum.findit.com.myapplication.Adapter.PagerAdapter;
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.view.QuizActivity;
 
 public class GameActiviry extends AppCompatActivity {
 
