@@ -20,4 +20,10 @@ public class GameService {
         numberOfPlayersDatabase.addValueEventListener(numberOfPlayersListener);
     }
 
+    public static void updateScore(Integer score, Integer percentage){
+        String userId = LoginService.getId();
+        DatabaseReference playerDatabase = gamesDatabase.child(gameId).child("players").child(userId);
+        playerDatabase.child("score").setValue(score);
+        playerDatabase.child("percentage").setValue(percentage);
+    }
 }
