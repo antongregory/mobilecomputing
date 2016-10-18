@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "537019078817",
+    "firebase_url": "https://find-it-d9d35.firebaseio.com",
+    "project_id": "find-it-d9d35",
+    "storage_bucket": "find-it-d9d35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537019078817:android:37b26bf73da20e5a",
+        "android_client_info": {
+          "package_name": "museum.findit.com.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "537019078817-ulef6k5jhbjniuc3a0eiludktqfd5v6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1J1ANiSZzFL0f7Bj68K9dZUCOyI0s1M4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
