@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.LoginService;
 
@@ -36,20 +37,20 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_MESSAGE, name);
         startActivity(intent);
 
-//        LoginService.login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                Log.d("UserLog", "signInAnonymously:onComplete:" + task.isSuccessful());
-//
-//                // If sign in fails, display a message to the user. If sign in succeeds
-//                // the auth state listener will be notified and logic to handle the
-//                // signed in user can be handled in the listener.
-//                if (!task.isSuccessful()) {
-//                    Log.w("UserLog", "signInAnonymously", task.getException());
-//                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-//                            Toast.LENGTH_SHORT).show();
-//                } else {
-////                    GameService.shared().create();
+        LoginService.login().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.d("UserLog", "signInAnonymously:onComplete:" + task.isSuccessful());
+
+                // If sign in fails, display a message to the user. If sign in succeeds
+                // the auth state listener will be notified and logic to handle the
+                // signed in user can be handled in the listener.
+                if (!task.isSuccessful()) {
+                    Log.w("UserLog", "signInAnonymously", task.getException());
+                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    GameOwnerService.create(name);
 //                    GameParticipantService.join(name).addOnCompleteListener(new OnCompleteListener<String>() {
 //                        @Override
 //                        public void onComplete(@NonNull Task<String> task) {
@@ -61,9 +62,9 @@ public class LoginActivity extends AppCompatActivity {
 //                            }
 //                        }
 //                    });
-//                }
-//            }
-//        });
+                }
+            }
+        });
     }
 
 }

@@ -18,10 +18,15 @@ public class GameOwnerService extends GameService {
         gamesDatabase.child(gameId).child("status").setValue("cancelled");
     }
 
-    public void create(){
+    public static void create(String username){
+        String userId = LoginService.getId();
         gameId = RandomIdGenerator.GetBase36(6);
         DatabaseReference gameDatabase = gamesDatabase.child(gameId);
         gameDatabase.child("status").setValue("opened");
         gameDatabase.child("numberOfPlayers").setValue(1);
+
+        DatabaseReference playerDatabase = gameDatabase.child("players").child(userId);
+        playerDatabase.child("username").setValue(username);
+        playerDatabase.child("order").setValue(1);
     }
 }
