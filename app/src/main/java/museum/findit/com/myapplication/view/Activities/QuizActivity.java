@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.view;
+package museum.findit.com.myapplication.view.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

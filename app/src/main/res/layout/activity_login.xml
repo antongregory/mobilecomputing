@@ -4,45 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="museum.findit.com.myapplication.view.LoginActivity">
+    android:fitsSystemWindows="true"
+    tools:context="museum.findit.com.myapplication.view.Activities.GameActiviry">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            app:srcCompat="@mipmap/logo"
-            android:id="@+id/app_logo"
-            android:adjustViewBounds="false"
-            android:layout_marginTop="150dp"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/username"
-            android:layout_marginTop="80dp"
-            android:layout_marginRight="60dp"
-            android:layout_marginLeft="60dp"
-            android:hint = "Enter your name"/>
+            <ImageView
+                app:srcCompat="@mipmap/logo"
+                android:id="@+id/app_logo"
+                android:adjustViewBounds="false"
+                android:layout_marginTop="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" />
 
-        <Button
-            android:text="Enter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp"
-            android:onClick="enterWaitingRoom"
-            android:background="@android:color/holo_green_light"
-            android:textSize="18sp"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textStyle="normal|bold" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/gamecode"
 
-    </LinearLayout>
+                android:hint = "Enter your name"
+                android:layout_margin="60dp" />
+
+            <Button
+                android:text="Enter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/buttonColor"
+                android:textColor="@color/textColor"
+                android:onClick="enterWaitingRoom"
+
+
+                android:id="@+id/button6"
+                android:layout_alignTop="@+id/gamecode"
+                android:layout_toRightOf="@+id/gamecode"
+                android:layout_toEndOf="@+id/gamecode"
+                android:layout_margin="20dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
