@@ -19,6 +19,8 @@ public class GameOwnerService extends GameService {
     }
 
     public static void create(String username){
+        GameService.username = username;
+
         String userId = LoginService.getId();
         gameId = RandomIdGenerator.GetBase36(6);
         DatabaseReference gameDatabase = gamesDatabase.child(gameId);

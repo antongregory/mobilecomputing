@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
  * Created by doniramadhan on 2016-10-12.
  */
 public class GameParticipantService extends GameService{
-    public static Task<String> join(final String joinGameId){
+    public static Task<String> join(final String joinGameId, final String username){
         final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
         final DatabaseReference statusDatabase = GameService.gamesDatabase.child(joinGameId).child("status");
         statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -26,7 +26,7 @@ public class GameParticipantService extends GameService{
 
                 if ("opened".equals(gameStatus)) {
                     GameService.gameId = joinGameId;
-                    gameJoined();
+                    gameJoined(username);
                     taskCompletionSource.setResult(joinGameId);
                 } else {
                     taskCompletionSource.setException(new Exception("game already " + gameStatus));
@@ -44,8 +44,10 @@ public class GameParticipantService extends GameService{
         return taskCompletionSource.getTask();
     }
 
-    private static void gameJoined(){
-        final DatabaseReference numberOfPlayersDatabase = GameService.gamesDatabase.child(GameService.gameId).child("numberOfPlayers");
+    private static void gameJoined(final String username){
+        GameService.username = username;
+        final DatabaseReference gameDatabase = GameService.gamesDatabase.child(GameService.gameId);
+        final DatabaseReference numberOfPlayersDatabase = gameDatabase.child("numberOfPlayers");
         numberOfPlayersDatabase.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
@@ -61,6 +63,16 @@ public class GameParticipantService extends GameService{
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                if (b){
+                    String userId = LoginService.getId();
+                    Integer playerOrder = dataSnapshot.getValue(Integer.class);
+
+                    DatabaseReference playerDatabase = gameDatabase.child("players").child(userId);
+                    playerDatabase.child("username").setValue(username);
+                    playerDatabase.child("order").setValue(playerOrder);
+                    playerDatabase.child("percentage").setValue(0);
+                    playerDatabase.child("score").setValue(0);
+                }
                 Log.d("GameLog", "gameJoined:onComplete:" + databaseError);
             }
         });

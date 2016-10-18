@@ -11,8 +11,9 @@ import com.google.firebase.database.ValueEventListener;
 public class GameService {
     static DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("games");
 
-    // TODO: gameId should be persistence even when app is turned off
+    // TODO: gameId and username should be persistence even when app is turned off
     static String gameId;
+    static String username;
 
     public static void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");
