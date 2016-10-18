@@ -39,8 +39,8 @@ script:
    - ./gradlew cAT
    - ./gradlew sonarRunner
 
-# whitelist
-branches:
-  only:
-    - master
-    - develop
+# # whitelist
+# branches:
+#   only:
+#     - master
+#     - develop
