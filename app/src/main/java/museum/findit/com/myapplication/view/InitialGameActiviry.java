@@ -1,5 +1,6 @@
 package museum.findit.com.myapplication.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +17,14 @@ public class InitialGameActiviry extends AppCompatActivity {
 
     public void createGame(View view){
         //TODO
+
+        final Intent intent = new Intent(this, WaitingRoomActivity.class);
+        startActivity(intent);
     }
     public void enterGame(View view){
         //TODO
+
+        final Intent intent = new Intent(this, WaitingRoomActivity.class);
+        startActivity(intent);
     }
 }
