@@ -24,7 +24,8 @@
             android:label="@string/title_activity_game_activiry"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.QuizActivity" />
-        <activity android:name=".view.InitialGameActiviry"></activity>
+        <activity android:name=".view.InitialGameActiviry"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
