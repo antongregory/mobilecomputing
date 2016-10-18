@@ -13,9 +13,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.List;
+
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
+import museum.findit.com.myapplication.WebService.ItemService;
 import museum.findit.com.myapplication.WebService.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
