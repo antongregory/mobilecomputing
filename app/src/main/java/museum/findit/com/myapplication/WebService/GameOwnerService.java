@@ -28,5 +28,7 @@ public class GameOwnerService extends GameService {
         DatabaseReference playerDatabase = gameDatabase.child("players").child(userId);
         playerDatabase.child("username").setValue(username);
         playerDatabase.child("order").setValue(1);
+        playerDatabase.child("percentage").setValue(0);
+        playerDatabase.child("score").setValue(0);
     }
 }
