@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_end_game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="museum.findit.com.myapplication.view.Activities.EndGameActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <TextView
+            android:text="Congratulations!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"
+            android:textSize="30sp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:text="Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView15"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="Score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView14"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="Correct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView13"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="Bob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/firstName"
+                    android:layout_marginTop="30dp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="1500"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score1"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="100%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/correct1"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="David"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/secondName"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="1000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score2"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="80%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/correct2"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <TextView
+                    android:text="John"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/thirdName"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="800"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score3"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="60%"
+                    android:id="@+id/correct3"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:text="Emma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/forthName"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="500"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/score4"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:text="40%"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/correct4"
+                    android:layout_weight="1"
+                    android:layout_marginTop="30dp"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:text="Play Again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button7"
+            android:onClick="restartGame"
+            android:background="@color/buttonColor"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="18sp"
+            android:layout_marginTop="30dp"
+            android:layout_margin="30dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

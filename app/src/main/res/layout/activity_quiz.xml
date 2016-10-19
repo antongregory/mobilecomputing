@@ -120,7 +120,8 @@
             android:layout_marginRight="15dp"
             android:layout_marginStart="15dp"
             android:background="@android:color/holo_orange_dark"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="showDescription" />
 
         <Button
             android:text="B: Mexican"

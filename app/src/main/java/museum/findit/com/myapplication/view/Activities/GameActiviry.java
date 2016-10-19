@@ -68,13 +68,6 @@ public class GameActiviry extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startQuiz(View view){
-
-        Intent intent = new Intent(this, QuizActivity.class);
-        startActivity(intent);
-
-
-    }
 
     public void scanBarCode(View view){
 
@@ -107,21 +100,31 @@ public class GameActiviry extends AppCompatActivity {
 
 
 
+        Intent intent = new Intent(this, QuizActivity.class);
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents()==null){
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+
+
+                startActivity(intent);//FOR TEST
             }
             else {
                 Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
+
+
+                startActivity(intent);
             }
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
+    public void finish(View view){
+        Intent intent  = new Intent(this, EndGameActivity.class);
+        startActivity(intent);
+    }
 
 
 }
