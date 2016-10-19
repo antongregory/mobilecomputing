@@ -90,11 +90,10 @@
             </LinearLayout>
 
             <ImageView
-                android:layout_width="300dp"
-                android:layout_height="300dp"
                 app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-                android:layout_marginTop="30dp"
-                android:id="@+id/itemImageView" />
+                android:id="@+id/itemImageView"
+                android:layout_width="250dp"
+                android:layout_height="250dp" />
 
             <Button
                 android:text="Scan Barcode"
@@ -102,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:layout_marginTop="30dp"
-                android:onClick="scanBarCode"/>
+                android:onClick="scanBarCode"
+                android:layout_marginBottom="50dp" />
 
         </LinearLayout>
 
