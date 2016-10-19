@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.fragment;
+package museum.findit.com.myapplication.view.fragment;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import museum.findit.com.myapplication.R;
 
@@ -21,6 +23,8 @@ public class ItemFragment extends Fragment {
 
 
     }
+
+
 
 
 }

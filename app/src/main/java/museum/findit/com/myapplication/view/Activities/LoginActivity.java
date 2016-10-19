@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.view;
+package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import museum.findit.com.myapplication.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -18,14 +19,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        userName = (EditText) findViewById(R.id.username);
+        userName = (EditText) findViewById(R.id.gamecode);
     }
 
     public void enterWaitingRoom(View view) {
-        final Intent intent = new Intent(this, WaitingRoomActivity.class);
-        final String name = userName.getText().toString();
+
+        Intent intent = new Intent(this, JoinGameActivity.class);
+        String name = userName.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, name);
         startActivity(intent);
     }
-
 }

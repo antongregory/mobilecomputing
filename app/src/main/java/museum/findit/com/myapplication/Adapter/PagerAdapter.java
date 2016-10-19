@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import museum.findit.com.myapplication.fragment.ItemFragment;
-import museum.findit.com.myapplication.fragment.LeaderboardFragment;
+import museum.findit.com.myapplication.view.fragment.ItemFragment;
+import museum.findit.com.myapplication.view.fragment.LeaderboardFragment;
 
 /**
  * Created by hui on 2016-10-06.

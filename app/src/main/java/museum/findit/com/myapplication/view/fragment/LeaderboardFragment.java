@@ -1,4 +1,4 @@
-package museum.findit.com.myapplication.fragment;
+package museum.findit.com.myapplication.view.fragment;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
