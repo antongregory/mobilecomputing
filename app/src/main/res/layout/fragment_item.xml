@@ -101,8 +101,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
                 android:layout_marginTop="30dp"
-                android:onClick="scanBarCode"
-                android:layout_marginBottom="50dp" />
+                android:onClick="scanBarCode" />
+
+            <Button
+                android:text="finish*"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button8"
+                android:onClick="finish" />
 
         </LinearLayout>
 
