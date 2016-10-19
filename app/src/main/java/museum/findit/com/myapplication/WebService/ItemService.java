@@ -9,22 +9,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import museum.findit.com.myapplication.model.ItemModel;
 
 /**
  * Created by doniramadhan on 2016-10-18.
  */
 
 public class ItemService {
-    static DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("items");
+    private static DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("items");
 
-    public static Task<List<Object>> getAll(){
-        final TaskCompletionSource<List<Object>> taskCompletionSource = new TaskCompletionSource<>();
+    public static Task<ArrayList<ItemModel>> getAll(){
+        final TaskCompletionSource<ArrayList<ItemModel>> taskCompletionSource = new TaskCompletionSource<>();
         gamesDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<List<Object>> objectListType = new GenericTypeIndicator<List<Object>>() {};
-                List<Object> items = dataSnapshot.getValue(objectListType);
+                GenericTypeIndicator<ArrayList<ItemModel>> objectListType = new GenericTypeIndicator<ArrayList<ItemModel>>() {};
+                ArrayList<ItemModel> items = dataSnapshot.getValue(objectListType);
                 taskCompletionSource.setResult(items);
             }
 
