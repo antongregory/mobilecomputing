@@ -9,8 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".view.Activities.LoginActivity"
+    <activity android:name=".view.Activities.LoginActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,6 +33,7 @@
         <activity
             android:name=".view.Activities.JoinGameActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>
