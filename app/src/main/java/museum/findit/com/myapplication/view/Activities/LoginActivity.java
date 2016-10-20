@@ -12,7 +12,7 @@ import museum.findit.com.myapplication.R;
 public class LoginActivity extends AppCompatActivity {
 
 
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public final static String EXTRA_MESSAGE_NAME = "user_name";
     EditText userName ;
 
     @Override
@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, JoinGameActivity.class);
         String name = userName.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, name);
+        intent.putExtra(EXTRA_MESSAGE_NAME, name);
         startActivity(intent);
     }
 }
