@@ -10,7 +10,11 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+import android.view.KeyEvent;
+>>>>>>> develop
 import android.view.View;
 import android.widget.TextView;
 
@@ -76,6 +80,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+
     private void updateUI(String time) {
         quizTimerTextView.setText(time);
 
@@ -92,5 +97,16 @@ public class QuizActivity extends AppCompatActivity {
                 updateUI(message);
             }
         }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
+        {
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+
+
     }
 }

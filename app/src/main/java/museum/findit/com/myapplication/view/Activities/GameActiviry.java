@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -166,6 +167,16 @@ public class GameActiviry extends AppCompatActivity {
     public void finish(View view) {
         Intent intent = new Intent(this, EndGameActivity.class);
         startActivity(intent);
+    }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
+        {
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+
     }
 
     public class timerReceiver extends BroadcastReceiver {

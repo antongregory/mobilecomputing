@@ -23,7 +23,8 @@
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textStyle="normal|bold"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="Score"
@@ -33,7 +34,8 @@
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textStyle="normal|bold"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="Correct"
@@ -43,7 +45,8 @@
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textStyle="normal|bold"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -62,7 +65,8 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="1500"
@@ -72,7 +76,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="100%"
@@ -82,7 +87,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -101,7 +107,8 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="1000"
@@ -111,7 +118,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="80%"
@@ -121,7 +129,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
             </TableRow>
 
             <TableRow
@@ -141,7 +150,8 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="800"
@@ -151,7 +161,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
 
                 <TextView
                 android:layout_width="wrap_content"
@@ -162,7 +173,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
 
             </TableRow>
 
@@ -182,7 +194,8 @@
                     android:singleLine="true"
                     android:ellipsize="marquee"
                     android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:focusableInTouchMode="true"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="500"
@@ -192,7 +205,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
 
                 <TextView
                     android:text="40%"
@@ -202,7 +216,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="30dp"
                     android:textSize="18sp"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textAlignment="center" />
             </TableRow>
         </TableLayout>
 
