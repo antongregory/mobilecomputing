@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.controller.TimerService;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.LoginActivity;
 

@@ -53,7 +53,7 @@
                 android:layout_alignTop="@+id/gamecode"
                 android:layout_toRightOf="@+id/gamecode"
                 android:layout_toEndOf="@+id/gamecode"
-                android:layout_margin="20dp" />
+                android:layout_margin="50dp" />
 
         </LinearLayout>
 
