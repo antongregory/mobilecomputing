@@ -82,6 +82,13 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        stopService(new Intent(this, QuizTimerService.class));
+
+    }
+
 
     public void showDescription(View vew) {
         stopService(new Intent(this, QuizTimerService.class));
