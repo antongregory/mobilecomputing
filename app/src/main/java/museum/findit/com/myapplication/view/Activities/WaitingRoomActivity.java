@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameOwnerService;
+import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
 
@@ -64,6 +66,12 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         welcomeInfo.setText("Welcome "+message+"!");
     }
     public void backToLogin(View view) {
+        if(CurrentUser.isOwner()){
+            GameOwnerService.cancel();
+        } else {
+            GameParticipantService.leave();
+        }
+        
        finish();
     }
 
