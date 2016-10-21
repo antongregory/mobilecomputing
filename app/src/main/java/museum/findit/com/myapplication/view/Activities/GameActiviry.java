@@ -179,6 +179,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
     }
 
     public void finish(View view) {
+        stopService(new Intent(this, TimerService.class));
         Intent intent = new Intent(this, EndGameActivity.class);
         startActivity(intent);
     }
