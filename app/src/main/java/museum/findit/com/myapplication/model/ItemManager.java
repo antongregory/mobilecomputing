@@ -57,6 +57,7 @@ public class ItemManager implements Manager,QuestionHandler{
 
 
     public void loadDummyData(){
+
         ItemModel item=new ItemModel();
         Question question1=new Question();
 
@@ -140,6 +141,7 @@ public class ItemManager implements Manager,QuestionHandler{
             return item;
         }
         else{
+            //// TODO: 2016-10-21  reset current item index 
             return null;
         }
 

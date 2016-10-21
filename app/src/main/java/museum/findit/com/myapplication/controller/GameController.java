@@ -43,6 +43,8 @@ public class GameController extends Controller{
 
 
 
+
+
     public void checkAnswer(String choice){
         String result=ItemManager.getInstance().getCurrentQuestionAnswer();
         Log.d("DEBUG","answer is : "+result);

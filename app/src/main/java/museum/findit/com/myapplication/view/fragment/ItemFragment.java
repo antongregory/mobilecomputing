@@ -1,6 +1,7 @@
 package museum.findit.com.myapplication.view.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,12 +18,15 @@ import org.w3c.dom.Text;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.GameController;
+import museum.findit.com.myapplication.controller.TimerService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.model.Question;
+import museum.findit.com.myapplication.view.Activities.EndGameActivity;
 
 import static museum.findit.com.myapplication.R.id.itemTextView;
 import static museum.findit.com.myapplication.R.id.scoreTextView;
+import static museum.findit.com.myapplication.R.id.start;
 
 /**
  * Created by hui on 2016-10-06.
@@ -47,6 +51,7 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
         View view=inflater.inflate(R.layout.fragment_item, container, false);
         intialise(view);
         gameController.updateItem();
+
         itemTextView.setText("2/5");
 
 
@@ -73,7 +78,10 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
 
     @Override
     public void onFailure() {
+         getActivity().stopService(new Intent(getActivity(), TimerService.class));
         Toast.makeText(getActivity(), "Load end game screen", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getActivity(), EndGameActivity.class);
+        startActivity(intent);
 
     }
 
