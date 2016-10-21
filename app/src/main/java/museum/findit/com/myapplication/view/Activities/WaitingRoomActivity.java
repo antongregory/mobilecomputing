@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.Controller;
+import museum.findit.com.myapplication.model.CurrentUser;
 
 public class WaitingRoomActivity extends AppCompatActivity implements Controller.ViewHandler {
 
@@ -35,6 +37,10 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
         }
 
+        if(CurrentUser.isParticipant()){
+            View startButton = findViewById(R.id.startbtn);
+            startButton.setVisibility(View.INVISIBLE);
+        }
 
         initialise();
         mController=new Controller(this);
@@ -76,6 +82,6 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
     @Override
     public void onFailure(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.Controller;
@@ -52,7 +53,7 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
 
     @Override
     public void onFailure(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
 

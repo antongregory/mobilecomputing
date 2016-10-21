@@ -9,6 +9,7 @@ import com.google.firebase.auth.AuthResult;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.LoginService;
+import museum.findit.com.myapplication.model.CurrentUser;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.JoinGameActivity;
@@ -70,6 +71,7 @@ public class Controller {
             @Override
             public void onComplete(@NonNull Task<String> task) {
                 if(task.isSuccessful()){
+                    CurrentUser.setAsParticipant();
                     viewListener.onSucess(WaitingRoomActivity.class);
                 } else {
                     viewListener.onFailure("Joining game failed");
@@ -84,6 +86,7 @@ public class Controller {
         //on sucess load the view
         String username = ItemManager.getInstance().getUserName();
         GameOwnerService.create(username);
+        CurrentUser.setAsOwner();
         viewListener.onSucess(WaitingRoomActivity.class);
     }
 
