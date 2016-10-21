@@ -16,22 +16,30 @@ import com.google.zxing.integration.android.IntentResult;
 
 import museum.findit.com.myapplication.Adapter.PagerAdapter;
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.controller.Controller;
+import museum.findit.com.myapplication.controller.GameController;
+import museum.findit.com.myapplication.model.ItemModel;
+import museum.findit.com.myapplication.model.Question;
 
-public class GameActiviry extends AppCompatActivity {
+public class GameActiviry extends AppCompatActivity implements Controller.ViewHandler{
 
+    private  Controller controller;
+
+
+    ItemModel item;
+    TabLayout tabLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Item"));
-        tabLayout.addTab(tabLayout.newTab().setText("Leaderboard"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
+        controller=new Controller(this);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
+
+        initialise();
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
+
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -50,6 +58,14 @@ public class GameActiviry extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initialise(){
+
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Item"));
+        tabLayout.addTab(tabLayout.newTab().setText("Leaderboard"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
     }
 
     @Override
@@ -93,7 +109,7 @@ public class GameActiviry extends AppCompatActivity {
            integrator.initiateScan();
        }
        catch (Exception e){
-           Log.d("sad","sa"+e.toString());
+           Log.d("Exception","sa"+e.toString());
        }
 
 
@@ -105,16 +121,15 @@ public class GameActiviry extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
-
-
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null){
             if(result.getContents()==null){
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+                //controller.compareBarCode(result.getContents());
             }
             else {
                 Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
+                controller.compareBarCode(result.getContents());
             }
         }
         else {
@@ -123,5 +138,14 @@ public class GameActiviry extends AppCompatActivity {
     }
 
 
+    @Override
+    public void loadNextView(Class view) {
+        Intent intent = new Intent(this, view);
+        startActivity(intent);
+    }
 
+    @Override
+    public void displayFailMessage() {
+        Toast.makeText(this, "Incorrect item", Toast.LENGTH_LONG).show();
+    }
 }

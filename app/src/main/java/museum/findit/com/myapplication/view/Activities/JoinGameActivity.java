@@ -4,13 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.controller.Controller;
 
-public class JoinGameActivity extends AppCompatActivity {
+public class JoinGameActivity extends AppCompatActivity implements Controller.ViewHandler{
 
     String message;
     public final static String EXTRA_MESSAGE = "name";
+    private EditText editText;
+    private Controller mController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,23 +22,36 @@ public class JoinGameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
          message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE);
+        initialise();
+        mController=new Controller(this);
+    }
 
+    private void initialise(){
+        editText=(EditText)findViewById(R.id.gamecode);
     }
 
 
     public void createGameRoom(View view) {
-        Intent intent = new Intent(this, WaitingRoomActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+
+        mController.createGameAction();
+
     }
 
     public void joinGameRoom(View view) {
-        Intent intent = new Intent(this, WaitingRoomActivity.class);
+        mController.joinGameAction(editText.getText().toString());
+    }
 
+    public void loadNextView(Class view){
+
+        Intent intent = new Intent(this, view);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
+    @Override
+    public void displayFailMessage() {
+
+    }
 
 
 }
