@@ -18,6 +18,7 @@ public class GameOwnerService extends GameService {
         gamesDatabase.child(gameId).child("status").setValue("cancelled");
     }
 
+    // TODO: 2016-10-21 create should return game code
     public static void create(String username){
         GameService.username = username;
 

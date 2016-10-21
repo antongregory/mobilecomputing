@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.LoginService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
@@ -70,6 +71,8 @@ public class Controller {
 
         //Call the corresponding service
         //on sucess load the view
+        String username = ItemManager.getInstance().getUserName();
+        GameOwnerService.create(username);
         viewListener.onSucess(WaitingRoomActivity.class);
     }
 

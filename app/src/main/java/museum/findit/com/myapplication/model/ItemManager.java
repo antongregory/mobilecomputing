@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ItemManager implements Manager,QuestionHandler{
 
-
+    private String username;
     ItemModel item;
     Question question;
     ArrayList<Question> questionList;
@@ -35,8 +35,12 @@ public class ItemManager implements Manager,QuestionHandler{
 
 
     public void setUserName(String username){
-
+        this.username = username;
         Log.d("DEBUG","username is "+username);
+    }
+
+    public String getUserName(){
+        return username;
     }
 
     public static ItemManager getInstance() {
