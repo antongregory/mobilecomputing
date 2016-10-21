@@ -1,10 +1,8 @@
 package museum.findit.com.myapplication.view.Activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,8 +40,8 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String message) {
 
-        Toast.makeText(this, "User name cannot be empty", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

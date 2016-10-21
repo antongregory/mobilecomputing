@@ -38,7 +38,7 @@ public class GameController extends Controller{
         if(item!=null)
         gameListener.loadGameItem(item);
         else
-            gameListener.onFailure();
+            gameListener.onFailure("Incorrect item");
     }
 
 

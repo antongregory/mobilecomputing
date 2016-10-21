@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
@@ -21,15 +20,11 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import java.util.TimerTask;
-
 import museum.findit.com.myapplication.Adapter.PagerAdapter;
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.TimerService;
 import museum.findit.com.myapplication.controller.Controller;
-import museum.findit.com.myapplication.controller.GameController;
 import museum.findit.com.myapplication.model.ItemModel;
-import museum.findit.com.myapplication.model.Question;
 
 public class GameActiviry extends AppCompatActivity implements Controller.ViewHandler{
 
@@ -211,7 +206,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
     }
 
     @Override
-    public void onFailure() {
-        Toast.makeText(this, "Incorrect item", Toast.LENGTH_LONG).show();
+    public void onFailure(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }

@@ -51,7 +51,7 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String message) {
 
     }
 

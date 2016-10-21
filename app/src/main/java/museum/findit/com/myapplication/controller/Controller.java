@@ -1,5 +1,12 @@
 package museum.findit.com.myapplication.controller;
 
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+
+import museum.findit.com.myapplication.WebService.LoginService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.JoinGameActivity;
@@ -29,13 +36,22 @@ public class Controller {
     //load item and item activity
 
     //login check
-    public void loginAction(String username){
+    public void loginAction(final String username){
         if(username.trim().length()==0){
-            viewListener.onFailure();
+            viewListener.onFailure("User name cannot be empty");
         }
         else{
-            ItemManager.getInstance().setUserName(username);
-            viewListener.onSucess(JoinGameActivity.class);
+            LoginService.login().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        ItemManager.getInstance().setUserName(username);
+                        viewListener.onSucess(JoinGameActivity.class);
+                    } else {
+                        viewListener.onFailure("Login failed. Try again later");
+                    }
+                }
+            });
         }
 
 
@@ -78,7 +94,7 @@ public class Controller {
     public interface ViewHandler {
 
         public void onSucess(Class view);
-        public void onFailure();
+        public void onFailure(String message);
 
     }
 

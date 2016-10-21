@@ -11,18 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-
-import org.w3c.dom.Text;
-
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.GameController;
-import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.model.Question;
-
-import static museum.findit.com.myapplication.R.id.itemTextView;
-import static museum.findit.com.myapplication.R.id.scoreTextView;
 
 /**
  * Created by hui on 2016-10-06.
@@ -72,8 +64,8 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
     }
 
     @Override
-    public void onFailure() {
-        Toast.makeText(getActivity(), "Load end game screen", Toast.LENGTH_LONG).show();
+    public void onFailure(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
 
     }
 

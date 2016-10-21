@@ -8,10 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import museum.findit.com.myapplication.R;
-import museum.findit.com.myapplication.controller.TimerService;
 import museum.findit.com.myapplication.controller.Controller;
-import museum.findit.com.myapplication.view.Activities.GameActiviry;
-import museum.findit.com.myapplication.view.Activities.LoginActivity;
 
 public class WaitingRoomActivity extends AppCompatActivity implements Controller.ViewHandler {
 
@@ -78,7 +75,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String message) {
 
     }
 }

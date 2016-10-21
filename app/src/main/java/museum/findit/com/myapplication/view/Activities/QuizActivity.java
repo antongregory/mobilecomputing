@@ -16,22 +16,14 @@ import android.widget.TextView;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.QuizTimerService;
-import museum.findit.com.myapplication.controller.TimerService;
-import android.content.Intent;
+
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import museum.findit.com.myapplication.R;
-import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.controller.GameController;
 import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.model.Question;
@@ -178,7 +170,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     }
 
     @Override
-    public void onFailure() {
+    public void onFailure(String message) {
 
     }
 
