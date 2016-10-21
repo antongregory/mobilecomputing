@@ -2,11 +2,15 @@ package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
@@ -71,13 +75,16 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         } else {
             GameParticipantService.leave();
         }
-        
+
        finish();
     }
 
 
      public void startGame(View view){
-            mController.startLoadingData();
+         if(CurrentUser.isOwner()){
+             GameOwnerService.start();
+             mController.startLoadingData();
+         }
      }
 
 
