@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
     }
 
     @Override
-    public void loadNextView(Class view) {
+    public void onSucess(Class view) {
 
         Intent intent = new Intent(this, view);
         intent.putExtra(EXTRA_MESSAGE, name);
@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
 
         Toast.makeText(this, "User name cannot be empty", Toast.LENGTH_LONG).show();
     }

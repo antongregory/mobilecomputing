@@ -41,7 +41,7 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
         mController.joinGameAction(editText.getText().toString());
     }
 
-    public void loadNextView(Class view){
+    public void onSucess(Class view){
 
         Intent intent = new Intent(this, view);
         intent.putExtra(EXTRA_MESSAGE, message);
@@ -49,7 +49,7 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
 
     }
 

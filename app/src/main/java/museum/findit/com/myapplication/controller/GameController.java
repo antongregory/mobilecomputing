@@ -6,7 +6,6 @@ import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.model.Question;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
-import museum.findit.com.myapplication.view.Activities.QuizActivity;
 
 /**
  * Created by antongregory on 20/10/2016.
@@ -29,7 +28,7 @@ public class GameController extends Controller{
             if (question!=null)
         gameListener.loadQuizItem(question);
         else
-        gameListener.loadNextView(GameActiviry.class);
+        gameListener.onSucess(GameActiviry.class);
 
     }
 
@@ -39,7 +38,7 @@ public class GameController extends Controller{
         if(item!=null)
         gameListener.loadGameItem(item);
         else
-            gameListener.displayFailMessage();
+            gameListener.onFailure();
     }
 
 
@@ -55,7 +54,7 @@ public class GameController extends Controller{
                 gameListener.highLightWrong(result);
         }
      else {
-            Log.d("DEBUG","no question to display");
+            Log.d("DEBUG","answer is null to display");
         }
 
     }

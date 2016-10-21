@@ -76,14 +76,14 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
 
     @Override
-    public void loadNextView(Class view) {
+    public void onSucess(Class view) {
         Intent intent = new Intent(this, view);
 
         startActivity(intent);
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
 
     }
 
@@ -106,7 +106,8 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     @Override
     public void highLightCorrect() {
-        Toast.makeText(this, "right choice a",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "right choice"+selectedChoice.getText(),Toast.LENGTH_LONG).show();
+        finishQuiz();
     }
 
     @Override

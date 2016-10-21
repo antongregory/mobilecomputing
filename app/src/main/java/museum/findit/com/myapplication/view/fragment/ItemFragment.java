@@ -67,12 +67,12 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
 
 
     @Override
-    public void loadNextView(Class view) {
+    public void onSucess(Class view) {
 
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
         Toast.makeText(getActivity(), "Load end game screen", Toast.LENGTH_LONG).show();
 
     }

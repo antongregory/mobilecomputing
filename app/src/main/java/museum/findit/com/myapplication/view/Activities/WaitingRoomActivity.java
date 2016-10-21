@@ -43,14 +43,14 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
 
     @Override
-    public void loadNextView(Class view) {
+    public void onSucess(Class view) {
         Intent intent = new Intent(this, view);
 
         startActivity(intent);
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
 
     }
 }

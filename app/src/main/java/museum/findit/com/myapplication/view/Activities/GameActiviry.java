@@ -125,7 +125,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
         if(result != null){
             if(result.getContents()==null){
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
-                //controller.compareBarCode(result.getContents());
+                controller.compareBarCode(result.getContents());
             }
             else {
                 Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
@@ -139,13 +139,13 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
 
 
     @Override
-    public void loadNextView(Class view) {
+    public void onSucess(Class view) {
         Intent intent = new Intent(this, view);
         startActivity(intent);
     }
 
     @Override
-    public void displayFailMessage() {
+    public void onFailure() {
         Toast.makeText(this, "Incorrect item", Toast.LENGTH_LONG).show();
     }
 }

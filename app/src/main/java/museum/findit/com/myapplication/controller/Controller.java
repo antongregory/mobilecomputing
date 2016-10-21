@@ -1,7 +1,5 @@
 package museum.findit.com.myapplication.controller;
 
-import android.util.Log;
-
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.JoinGameActivity;
@@ -33,11 +31,11 @@ public class Controller {
     //login check
     public void loginAction(String username){
         if(username.trim().length()==0){
-            viewListener.displayFailMessage();
+            viewListener.onFailure();
         }
         else{
             ItemManager.getInstance().setUserName(username);
-            viewListener.loadNextView(JoinGameActivity.class);
+            viewListener.onSucess(JoinGameActivity.class);
         }
 
 
@@ -49,38 +47,38 @@ public class Controller {
 
         //Call the corresponding service
         //on sucess load the view
-        viewListener.loadNextView(WaitingRoomActivity.class);
+        viewListener.onSucess(WaitingRoomActivity.class);
     }
 
     public void createGameAction(){
 
         //Call the corresponding service
         //on sucess load the view
-        viewListener.loadNextView(WaitingRoomActivity.class);
+        viewListener.onSucess(WaitingRoomActivity.class);
     }
 
 
     public void startLoadingData(){
             ItemManager.getInstance().loadDummyData();
-        viewListener.loadNextView(GameActiviry.class);
+        viewListener.onSucess(GameActiviry.class);
         //initiate service and pass data to model
     }
 
     public void compareBarCode(String barcode){
 
-   if(ItemManager.getInstance().compareBarCode(barcode)){
-            viewListener.loadNextView(QuizActivity.class);
+   /*if(ItemManager.getInstance().compareBarCode(barcode)){
+            viewListener.onSucess(QuizActivity.class);
         }
         else{
-            viewListener.displayFailMessage();
-        }
-        //viewListener.loadNextView(QuizActivity.class);
+            viewListener.onFailure();
+        }*/
+        viewListener.onSucess(QuizActivity.class);
     }
 
     public interface ViewHandler {
 
-        public void loadNextView(Class view);
-        public void displayFailMessage();
+        public void onSucess(Class view);
+        public void onFailure();
 
     }
 
