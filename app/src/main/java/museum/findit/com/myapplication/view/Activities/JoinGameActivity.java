@@ -7,14 +7,17 @@ import android.view.View;
 import android.widget.EditText;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.controller.Controller;
 
-public class JoinGameActivity extends AppCompatActivity {
+public class JoinGameActivity extends AppCompatActivity implements Controller.ViewHandler{
 
     String message;
     public final static String EXTRA_MESSAGE_USERNAME = "user_name";
     public final static String EXTRA_MESSAGE_GAMECODE = "gamecode";
     String gameCode;
-
+    public final static String EXTRA_MESSAGE = "name";
+    private EditText editText;
+    private Controller mController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,29 +25,35 @@ public class JoinGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_join_game);
 
         Intent intent = getIntent();
-         message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_NAME);
+         message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_USERNAME);
+        initialise();
+        mController=new Controller(this);
+    }
 
+    private void initialise(){
+        editText=(EditText)findViewById(R.id.gamecodeText);
     }
 
 
     public void createGameRoom(View view) {
-        Intent intent = new Intent(this, WaitingRoomActivity.class);
-        intent.putExtra(EXTRA_MESSAGE_USERNAME, message);
-
-        startActivity(intent);
+        mController.createGameAction();
     }
 
     public void joinGameRoom(View view) {
-        gameCode= ((EditText) findViewById(R.id.gamecodeText)).getText().toString();
+        mController.joinGameAction(editText.getText().toString());
+    }
 
-        Intent intent = new Intent(this, WaitingRoomActivity.class);
+    public void onSucess(Class view){
 
-        intent.putExtra(EXTRA_MESSAGE_USERNAME, message);
-        intent.putExtra(EXTRA_MESSAGE_GAMECODE, gameCode);
-
+        Intent intent = new Intent(this, view);
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
+    @Override
+    public void onFailure() {
+
+    }
 
 
 }

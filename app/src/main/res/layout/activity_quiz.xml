@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="3/5"
-                    android:id="@+id/itemTextView" />
+                    android:id="@+id/questionNoTextView" />
             </LinearLayout>
 
             <LinearLayout
@@ -101,7 +101,7 @@
             android:text="Who use this boat?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/quizTextView"
+            android:id="@+id/questionTextView"
             android:textAlignment="center"
             android:textStyle="normal|bold"
             android:textSize="24sp"
@@ -112,7 +112,6 @@
             android:text="A: Afghan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button3"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="15dp"
             android:layout_marginEnd="15dp"
@@ -121,25 +120,28 @@
             android:layout_marginStart="15dp"
             android:background="@android:color/holo_orange_dark"
             android:textSize="20sp"
-            android:onClick="showDescription" />
+            android:id="@+id/choiceA"
+            android:onClick="selectedChoice" />
 
         <Button
             android:text="B: Mexican"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button4"
+            android:id="@+id/choiceB"
             android:layout_margin="15dp"
             android:background="@android:color/holo_blue_dark"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="selectedChoice" />
 
         <Button
             android:text="C: Swedish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button5"
+            android:id="@+id/choiceC"
             android:layout_margin="15dp"
             android:background="@android:color/holo_purple"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:onClick="selectedChoice" />
 
 
     </LinearLayout>
