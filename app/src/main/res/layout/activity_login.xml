@@ -4,12 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="museum.findit.com.myapplication.view.Activities.GameActiviry">
+    tools:context="museum.findit.com.myapplication.view.Activities.GameActiviry"
+    android:fitsSystemWindows="true">
 
 
     <RelativeLayout
+        android:id="@+id/rLayout_Spalsh"
         android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/loginscreen">
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,29 +28,44 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:gravity="center_horizontal">
 
             <ImageView
-                app:srcCompat="@mipmap/logo"
+                app:srcCompat="@drawable/vmlogo"
+                android:background="#88ffffff"
+                android:id="@+id/imageView"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content" />
+
+            <ImageView
+                app:srcCompat="@drawable/logo"
                 android:id="@+id/app_logo"
                 android:adjustViewBounds="false"
-                android:layout_marginTop="100dp"
-                android:layout_width="match_parent"
-                android:layout_height="80dp" />
+                android:layout_marginTop="80dp"
+                android:background="#88ffffff"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_width="350dp" />
 
             <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:inputType="textPersonName"
                 android:ems="10"
                 android:id="@+id/gamecode"
+                android:background="#88ffffff"
 
                 android:hint = "Enter your name"
-                android:layout_margin="60dp" />
+                android:layout_marginTop="80dp"
+                android:padding="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="350dp" />
 
             <Button
                 android:text="Enter"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:background="@color/buttonColor"
@@ -53,11 +77,10 @@
                 android:layout_alignTop="@+id/gamecode"
                 android:layout_toRightOf="@+id/gamecode"
                 android:layout_toEndOf="@+id/gamecode"
-                android:layout_margin="50dp" />
+                android:layout_marginTop="50dp"
+                android:layout_width="350dp" />
 
         </LinearLayout>
-
-
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -7,98 +7,70 @@
     android:fitsSystemWindows="true"
     tools:context="museum.findit.com.myapplication.view.Activities.JoinGameActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent" android:layout_height="match_parent">
 
 
-        <LinearLayout
-            android:orientation="vertical"
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            app:srcCompat="@mipmap/logo"
+            android:id="@+id/app_logo"
+            android:adjustViewBounds="false"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="100dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="40dp" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                app:srcCompat="@mipmap/logo"
-                android:id="@+id/app_logo"
-                android:adjustViewBounds="false"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="100dp"
-                android:layout_height="80dp"
-                android:layout_marginBottom="40dp" />
+        <Button
+            android:text="Create Game"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <Button
-                android:text="Create Game"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:background="@color/buttonColor"
+            android:textColor="@color/textColor"
+            android:onClick="createGameRoom"
+            android:id="@+id/buttonCreate"
 
-                android:background="@color/buttonColor"
-                android:textColor="@color/textColor"
-                android:onClick="createGameRoom"
-                android:id="@+id/buttonCreate"
+            android:layout_below="@+id/app_logo"
+            android:layout_margin="20dp" />
 
-                android:layout_below="@+id/app_logo"
-                android:layout_margin="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/buttonCreate"
-                android:layout_centerHorizontal="true"
-                android:textSize="18sp"
-                android:textColor="#000000"
-                android:text="-- OR --"
-                android:textAlignment="center"
-                android:textStyle="normal|bold" />
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:text="-- OR --"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_weight="2">
+        <Button
+            android:text="Join"
+            android:layout_width="match_parent"
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:id="@+id/gamecodeText"
-                    android:hint = "Game code"
+            android:layout_height="wrap_content"
 
+            android:background="@color/buttonColor"
+            android:textColor="@color/textColor"
 
-                    android:layout_below="@+id/app_logo"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_weight="1"
-                    android:layout_marginRight="10dp" />
+            android:id="@+id/button6"
+            android:layout_margin="20dp"
+            android:onClick="joinGameRoom" />
 
-                <Button
-                    android:text="Join"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:background="@color/buttonColor"
-                    android:textColor="@color/textColor"
-                    android:onClick="joinGameRoom"
-
-
-                    android:id="@+id/button6"
-                    android:layout_alignTop="@+id/gamecode"
-                    android:layout_toRightOf="@+id/gamecode"
-                    android:layout_toEndOf="@+id/gamecode"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="10dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
