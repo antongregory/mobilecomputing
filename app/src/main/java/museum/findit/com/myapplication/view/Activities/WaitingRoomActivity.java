@@ -74,11 +74,30 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
             });
         }
 
+        numberOfPlayersUpdateIfNeeded();
+
         initialise();
         mController=new Controller(this);
 
         welcomeInfo.setText("Welcome "+name+"!");
 
+    }
+
+    private void numberOfPlayersUpdateIfNeeded() {
+        final TextView numberOfPlayersTextView = (TextView) findViewById(R.id.numberOfPlayers);
+        GameService.listenNumberOfPlayers(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Integer numberOfplayers = dataSnapshot.getValue(Integer.class);
+                if(numberOfplayers != null)
+                    numberOfPlayersTextView.setText(numberOfplayers.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("GameLog", "Number of players cannot be read: " + databaseError.getDetails());
+            }
+        });
     }
 
     @Override
