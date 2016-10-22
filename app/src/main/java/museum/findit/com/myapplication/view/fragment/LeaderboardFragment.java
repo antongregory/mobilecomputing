@@ -41,6 +41,7 @@ public class LeaderboardFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<HashMap<String, Player>> objectListType = new GenericTypeIndicator<HashMap<String, Player>>() {};
                 HashMap<String, Player> players = dataSnapshot.getValue(objectListType);
+                if(players == null) return;
                 for (Map.Entry<String, Player> entry: players.entrySet()) {
                     Player player = entry.getValue();
                     // TODO: 2016-10-23 use player to build scoreboard

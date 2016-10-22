@@ -69,7 +69,8 @@ public class GameParticipantService extends GameService{
 
                     DatabaseReference playerDatabase = gameDatabase.child("players").child(userId);
                     playerDatabase.child("username").setValue(username);
-                    playerDatabase.child("order").setValue(playerOrder);
+                    if(playerOrder != null)
+                        playerDatabase.child("order").setValue(playerOrder);
                     playerDatabase.child("percentage").setValue(0);
                     playerDatabase.child("score").setValue(0);
                 }
