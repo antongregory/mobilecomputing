@@ -6,11 +6,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.ArrayList;
+
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
+import museum.findit.com.myapplication.WebService.ItemService;
 import museum.findit.com.myapplication.WebService.LoginService;
 import museum.findit.com.myapplication.model.CurrentUser;
 import museum.findit.com.myapplication.model.ItemManager;
+import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.JoinGameActivity;
 import museum.findit.com.myapplication.view.Activities.QuizActivity;
@@ -93,6 +97,15 @@ public class Controller {
 
     public void startLoadingData(){
             ItemManager.getInstance().loadDummyData();
+        ItemService.getAll().addOnCompleteListener(new OnCompleteListener<ArrayList<ItemModel>>() {
+            @Override
+            public void onComplete(@NonNull Task<ArrayList<ItemModel>> task) {
+                if(task.isSuccessful()){
+                    // TODO: 2016-10-23 use items instead of dummy data 
+                    ArrayList<ItemModel> items = task.getResult();
+                }
+            }
+        });
         viewListener.onSucess(GameActiviry.class);
         //initiate service and pass data to model
     }
