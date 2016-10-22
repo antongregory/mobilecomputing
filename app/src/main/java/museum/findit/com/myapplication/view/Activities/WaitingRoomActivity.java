@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -11,10 +12,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
+import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
 
@@ -46,6 +51,27 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         if(CurrentUser.isParticipant()){
             View startButton = findViewById(R.id.startbtn);
             startButton.setVisibility(View.INVISIBLE);
+
+            GameParticipantService.getGameStatus().addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String gameStatus = dataSnapshot.getValue(String.class);
+                    switch (gameStatus){
+                        case "started":
+                            mController.startLoadingData();
+                            break;
+                        case "cancelled":
+                            finish();
+                            break;
+                        default: break;
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.d("GameLog", "Game status cannot be read: " + databaseError.getDetails());
+                }
+            });
         }
 
         initialise();

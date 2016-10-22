@@ -77,10 +77,9 @@ public class GameParticipantService extends GameService{
             }
         });
     }
-
-    public static void listenGameStatusChanged(ValueEventListener gameStatusListener){
-        final DatabaseReference statusDatabase = GameService.gamesDatabase.child(GameService.gameId).child("status");
-        statusDatabase.addValueEventListener(gameStatusListener);
+    
+    public static DatabaseReference getGameStatus(){
+        return GameService.gamesDatabase.child(GameService.gameId).child("status");
     }
 
     public static void leave(){
