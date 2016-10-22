@@ -9,8 +9,6 @@ import museum.findit.com.myapplication.Helpers.RandomIdGenerator;
  */
 public class GameOwnerService extends GameService {
     public static void start(){
-
-        // TODO: should check whether the number of players is more than 1
         gamesDatabase.child(gameId).child("status").setValue("started");
     }
 
