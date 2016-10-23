@@ -55,9 +55,6 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
 
     public void joinGameRoom(View view) {
 
-        gameCode = editText.getText().toString();
-        mController.joinGameAction(gameCode);
-
         IntentIntegrator integrator = new IntentIntegrator(this);
 
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
@@ -89,8 +86,6 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
         if (result != null) {
             if (result.getContents() == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
-                startGame(result.getContents());//test
-
             }
             else {
 

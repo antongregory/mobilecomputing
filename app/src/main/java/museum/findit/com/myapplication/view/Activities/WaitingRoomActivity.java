@@ -48,14 +48,10 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
         welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
-        gamecodeTextView =  (TextView) findViewById(R.id.gamecode);
-
         Intent intent = getIntent();
         String username = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_USERNAME);
          gamecode = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_GAMECODE);
-        if(gamecode!=null && !gamecode.equals("")){
-            gamecodeTextView.setText(gamecode);
-        }
+
 
         if(CurrentUser.isParticipant()){
             View startButton = findViewById(R.id.startbtn);
@@ -85,7 +81,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
         numberOfPlayersUpdateIfNeeded();
 
-        initialise("hahahaha");
+        initialise(gamecode);
         mController=new Controller(this);
 
         welcomeInfo.setText("Welcome "+username+"!");
