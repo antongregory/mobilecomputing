@@ -43,14 +43,14 @@ public class LeaderboardUIManager {
         HashMap<String, HashMap<String, TextView>> leaderboardHashMap = new HashMap<String, HashMap<String, TextView>>();
         for (Map.Entry<String, Player> entry : players.entrySet()) {
             Player player = entry.getValue();
-            HashMap<String, TextView> rowHashMap = addTableRow(context, leaderboardLayout, player.username, player.score, player.percentage);
+            HashMap<String, TextView> rowHashMap = addTableRow(context, leaderboardLayout, player);
             leaderboardHashMap.put(entry.getKey(), rowHashMap);
         }
         this.leaderboardHashMap = leaderboardHashMap;
         this.isCreated = true;
     }
 
-    private HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, String username, Integer score, Integer percentage) {
+    private HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, Player player) {
         TableRow row = new TableRow(context);
         TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
@@ -58,9 +58,10 @@ public class LeaderboardUIManager {
         row.setLayoutParams(tableRowParams);
         leaderboardLayout.addView(row);
 
-        addUsernameTextView(context, row, username);
-        TextView scoreTextView = addScoreTextView(context, row, score);
-        TextView percentageTextView = addPercentageTextView(context, row, percentage);
+        if(player.username == null || player.score == null || player.percentage == null) return null;
+        addUsernameTextView(context, row, player.username);
+        TextView scoreTextView = addScoreTextView(context, row, player.score);
+        TextView percentageTextView = addPercentageTextView(context, row, player.percentage);
 
         HashMap<String, TextView> textViewHashMap = new HashMap<String, TextView>();
         textViewHashMap.put("score", scoreTextView);
