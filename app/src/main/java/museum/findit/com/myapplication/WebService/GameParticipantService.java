@@ -1,7 +1,9 @@
 package museum.findit.com.myapplication.WebService;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.firebase.database.DataSnapshot;
@@ -15,8 +17,8 @@ import com.google.firebase.database.ValueEventListener;
  * Created by doniramadhan on 2016-10-12.
  */
 public class GameParticipantService extends GameService{
-    public static Task<String> join(final String joinGameId, final String username){
-        final TaskCompletionSource<String> taskCompletionSource = new TaskCompletionSource<>();
+    public static Task<Boolean> join(final String joinGameId, final String username){
+        final TaskCompletionSource<Boolean> taskCompletionSource = new TaskCompletionSource<>();
         final DatabaseReference statusDatabase = GameService.gamesDatabase.child(joinGameId).child("status");
         statusDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -27,9 +29,9 @@ public class GameParticipantService extends GameService{
                 if ("opened".equals(gameStatus)) {
                     GameService.gameId = joinGameId;
                     gameJoined(username);
-                    taskCompletionSource.setResult(joinGameId);
+                    taskCompletionSource.setResult(true);
                 } else {
-                    taskCompletionSource.setException(new Exception("game already " + gameStatus));
+                    taskCompletionSource.setResult(false);
                 }
             }
 
@@ -75,6 +77,20 @@ public class GameParticipantService extends GameService{
                     playerDatabase.child("score").setValue(0);
                 }
                 Log.d("GameLog", "gameJoined:onComplete:" + databaseError);
+            }
+        });
+
+        gameDatabase.child("seed").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Integer seed = dataSnapshot.getValue(Integer.class);
+                if(seed == null) return;
+                GameService.seed = seed;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("GameLog", "Seed cannot be read");
             }
         });
     }

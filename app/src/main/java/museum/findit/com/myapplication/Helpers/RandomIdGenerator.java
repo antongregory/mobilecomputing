@@ -22,4 +22,8 @@ public class RandomIdGenerator {
 
         return sb.toString();
     }
+
+    public static Integer GetSeed(){
+        return _random.nextInt(100);
+    }
 }

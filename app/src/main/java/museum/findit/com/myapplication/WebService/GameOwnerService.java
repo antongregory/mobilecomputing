@@ -21,9 +21,12 @@ public class GameOwnerService extends GameService {
 
         String userId = LoginService.getId();
         gameId = RandomIdGenerator.GetBase36(6);
+        seed = RandomIdGenerator.GetSeed();
+
         DatabaseReference gameDatabase = gamesDatabase.child(gameId);
         gameDatabase.child("status").setValue("opened");
         gameDatabase.child("numberOfPlayers").setValue(1);
+        gameDatabase.child("seed").setValue(seed);
 
         DatabaseReference playerDatabase = gameDatabase.child("players").child(userId);
         playerDatabase.child("username").setValue(username);

@@ -71,10 +71,10 @@ public class Controller {
         //Call the corresponding service
         //on sucess load the view
         String username = ItemManager.getInstance().getUserName();
-        GameParticipantService.join(gameCode, username).addOnCompleteListener(new OnCompleteListener<String>() {
+        GameParticipantService.join(gameCode, username).addOnCompleteListener(new OnCompleteListener<Boolean>() {
             @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if(task.isSuccessful()){
+            public void onComplete(@NonNull Task<Boolean> task) {
+                if(task.isSuccessful() && task.getResult()){
                     CurrentUser.setAsParticipant();
                     viewListener.onSucess(WaitingRoomActivity.class);
                 } else {
