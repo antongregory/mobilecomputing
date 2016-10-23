@@ -58,8 +58,8 @@ public class LeaderboardUIManager {
         leaderboardLayout.addView(row);
 
         addUsernameTextView(context, row, username);
-        TextView scoreTextView = addNumberTextView(context, row, score);
-        TextView percentageTextView = addNumberTextView(context, row, percentage);
+        TextView scoreTextView = addScoreTextView(context, row, score);
+        TextView percentageTextView = addPercentageTextView(context, row, percentage);
 
         HashMap<String, TextView> textViewHashMap = new HashMap<String, TextView>();
         textViewHashMap.put("score", scoreTextView);
@@ -86,7 +86,7 @@ public class LeaderboardUIManager {
         row.addView(usernameTextView);
     }
 
-    public TextView addNumberTextView(Context context, TableRow row, Integer number) {
+    public TextView addScoreTextView(Context context, TableRow row, Integer score) {
         TextView numberTextView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
@@ -98,7 +98,24 @@ public class LeaderboardUIManager {
         numberTextView.setTextColor(Color.BLACK);
         numberTextView.setTextSize(18);
         numberTextView.setGravity(Gravity.CENTER);
-        numberTextView.setText(number.toString());
+        numberTextView.setText(score.toString());
+        row.addView(numberTextView);
+        return numberTextView;
+    }
+
+    public TextView addPercentageTextView(Context context, TableRow row, Integer percentage) {
+        TextView numberTextView = new TextView(context);
+
+        TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
+                TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
+        textViewParams.topMargin = 30;
+        numberTextView.setLayoutParams(textViewParams);
+
+        numberTextView.setTextColor(Color.BLACK);
+        numberTextView.setTextSize(18);
+        numberTextView.setGravity(Gravity.CENTER);
+        numberTextView.setText(percentage.toString() + "%");
         row.addView(numberTextView);
         return numberTextView;
     }
