@@ -41,7 +41,6 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
         Intent intent = getIntent();
 
          username = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_USERNAME);
-        initialise();
 
         mController=new Controller(this);
     }
