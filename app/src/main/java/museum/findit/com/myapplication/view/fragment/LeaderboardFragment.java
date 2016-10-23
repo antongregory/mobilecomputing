@@ -52,13 +52,8 @@ public class LeaderboardFragment extends Fragment {
                 HashMap<String, Player> players = dataSnapshot.getValue(objectListType);
                 if(players == null) return;
                 if(!isLeaderboardCreated){
-                    createLeaderboard();
+                    createLeaderboard(players);
                     isLeaderboardCreated = true;
-                }
-                for (Map.Entry<String, Player> entry: players.entrySet()) {
-                    Player player = entry.getValue();
-                    // TODO: 2016-10-23 use player to build scoreboard
-                    Log.d("GameLeaderBoard", player.username + "|" + player.score.toString() + "|" + player.percentage.toString());
                 }
             }
 
@@ -69,13 +64,14 @@ public class LeaderboardFragment extends Fragment {
         });
     }
 
-    private void createLeaderboard(){
+    private void createLeaderboard(HashMap<String, Player> players){
         Context context = getContext();
         TableLayout leaderboardLayout = (TableLayout) getActivity().findViewById(R.id.leaderboard);
 
-        addTableRow(context, leaderboardLayout, "Bob", 120, 30);
-        addTableRow(context, leaderboardLayout, "You", 120, 30);
-        addTableRow(context, leaderboardLayout, "Me", 120, 30);
+        for (Map.Entry<String, Player> entry: players.entrySet()) {
+            Player player = entry.getValue();
+            addTableRow(context, leaderboardLayout, player.username, player.score, player.percentage);
+        }
     }
 
     private HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, String username, Integer score, Integer percentage) {
