@@ -15,7 +15,7 @@ import java.util.TimerTask;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 
 public class TimerService extends Service {
-    private static Timer timer = new Timer();
+    private static Timer timer;
     private Context ctx;
     private int seconds= 0;
 
@@ -33,6 +33,7 @@ public class TimerService extends Service {
 
     private void startService()
     {
+        timer = new Timer();
         timer.scheduleAtFixedRate(new mainTask(), 0, 1000);
     }
 

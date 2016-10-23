@@ -74,6 +74,13 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        stopService(new Intent(this, QuizTimerService.class));
+
+    }
+
 
     public void showDescription(View vew) {
         stopService(new Intent(this, QuizTimerService.class));
@@ -194,6 +201,8 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     @Override
     public void highLightCorrect() {
         Toast.makeText(this, "right choice"+selectedChoice.getText(),Toast.LENGTH_LONG).show();
+
+        selectedChoice.setBackgroundColor(getResources().getColor(R.color.buttonColor));
         finishQuiz();
     }
 
@@ -205,21 +214,28 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
             case R.id.choiceA:
                 choiceA.startAnimation(mAnimation);
                 Toast.makeText(this, "right choice a",Toast.LENGTH_LONG).show();
+                choiceA.setBackgroundColor(getResources().getColor(R.color.buttonColor));
 
                 break;
             case R.id.choiceB:
                 choiceB.startAnimation(mAnimation);
                 Toast.makeText(this, "right choice b",Toast.LENGTH_LONG).show();
 
+                choiceB.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+
+
                 break;
             case R.id.choiceC:
                 choiceC.startAnimation(mAnimation);
                 Toast.makeText(this, "right choice c",Toast.LENGTH_LONG).show();
 
+                choiceC.setBackgroundColor(getResources().getColor(R.color.buttonColor));
+
                 break;
         }
 
         Toast.makeText(this, "wrong "+selectedChoice.getText(),Toast.LENGTH_LONG).show();
+        selectedChoice.setBackgroundColor(getResources().getColor(R.color.cancelColor));
         finishQuiz();
     }
 

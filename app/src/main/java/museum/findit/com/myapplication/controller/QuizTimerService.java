@@ -14,7 +14,7 @@ import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.QuizActivity;
 
 public class QuizTimerService extends Service {
-    private static Timer timer = new Timer();
+    private static Timer timer;
     private Context ctx;
     private int seconds= 0;
 
@@ -32,6 +32,7 @@ public class QuizTimerService extends Service {
 
     private void startService()
     {
+        timer = new Timer();
         timer.scheduleAtFixedRate(new QuizTimerService.mainTask(), 0, 1000);
     }
 
@@ -40,7 +41,7 @@ public class QuizTimerService extends Service {
         public void run()
         {
             seconds++;
-            Log.v("timer",""+seconds);
+            Log.v("Quiz timer",""+seconds);
             broadcastIntent();
 
             //     Toast.makeText(ctx, "test", Toast.LENGTH_SHORT).show();
