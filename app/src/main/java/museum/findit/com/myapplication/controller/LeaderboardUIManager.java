@@ -14,8 +14,8 @@ import java.util.Map;
 import museum.findit.com.myapplication.model.Player;
 
 public class LeaderboardUIManager {
-    public Boolean isLeaderboardCreated = false;
-    public HashMap<String, HashMap<String, TextView>> leaderboardHashMap;
+    public Boolean isCreated = false;
+    private HashMap<String, HashMap<String, TextView>> leaderboardHashMap;
 
     public LeaderboardUIManager() {
     }
@@ -29,7 +29,7 @@ public class LeaderboardUIManager {
         }
     }
 
-    public void updateRow(HashMap<String, TextView> rowHashMap, Player player) {
+    private void updateRow(HashMap<String, TextView> rowHashMap, Player player) {
         if (rowHashMap == null) return;
         TextView scoreTextView = rowHashMap.get("score");
         TextView percentageTextView = rowHashMap.get("percentage");
@@ -39,17 +39,18 @@ public class LeaderboardUIManager {
         percentageTextView.setText(player.percentage.toString() + "%");
     }
 
-    public HashMap<String, HashMap<String, TextView>> createLeaderboard(Context context, TableLayout leaderboardLayout, HashMap<String, Player> players) {
+    public void createLeaderboard(Context context, TableLayout leaderboardLayout, HashMap<String, Player> players) {
         HashMap<String, HashMap<String, TextView>> leaderboardHashMap = new HashMap<String, HashMap<String, TextView>>();
         for (Map.Entry<String, Player> entry : players.entrySet()) {
             Player player = entry.getValue();
             HashMap<String, TextView> rowHashMap = addTableRow(context, leaderboardLayout, player.username, player.score, player.percentage);
             leaderboardHashMap.put(entry.getKey(), rowHashMap);
         }
-        return leaderboardHashMap;
+        this.leaderboardHashMap = leaderboardHashMap;
+        this.isCreated = true;
     }
 
-    public HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, String username, Integer score, Integer percentage) {
+    private HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, String username, Integer score, Integer percentage) {
         TableRow row = new TableRow(context);
         TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.MATCH_PARENT,
@@ -67,7 +68,7 @@ public class LeaderboardUIManager {
         return textViewHashMap;
     }
 
-    public void addUsernameTextView(Context context, TableRow row, String username) {
+    private void addUsernameTextView(Context context, TableRow row, String username) {
         TextView usernameTextView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
@@ -86,7 +87,7 @@ public class LeaderboardUIManager {
         row.addView(usernameTextView);
     }
 
-    public TextView addScoreTextView(Context context, TableRow row, Integer score) {
+    private TextView addScoreTextView(Context context, TableRow row, Integer score) {
         TextView numberTextView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
@@ -103,7 +104,7 @@ public class LeaderboardUIManager {
         return numberTextView;
     }
 
-    public TextView addPercentageTextView(Context context, TableRow row, Integer percentage) {
+    private TextView addPercentageTextView(Context context, TableRow row, Integer percentage) {
         TextView numberTextView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(

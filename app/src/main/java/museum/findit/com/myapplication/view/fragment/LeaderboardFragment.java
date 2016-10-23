@@ -9,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,14 +46,10 @@ public class LeaderboardFragment extends Fragment {
                 GenericTypeIndicator<HashMap<String, Player>> objectListType = new GenericTypeIndicator<HashMap<String, Player>>() {};
                 HashMap<String, Player> players = dataSnapshot.getValue(objectListType);
                 if(players == null) return;
-                if(!leaderboardUIManager.isLeaderboardCreated){
+                if(!leaderboardUIManager.isCreated){
                     Context context = getContext();
                     TableLayout leaderboardLayout = (TableLayout) getActivity().findViewById(R.id.leaderboard);
-                    leaderboardUIManager.leaderboardHashMap = leaderboardUIManager.createLeaderboard(
-                            context,
-                            leaderboardLayout,
-                            players);
-                    leaderboardUIManager.isLeaderboardCreated = true;
+                    leaderboardUIManager.createLeaderboard(context, leaderboardLayout, players);
                 } else {
                     leaderboardUIManager.updateLeaderboard(players);
                 }
