@@ -35,6 +35,7 @@ import museum.findit.com.myapplication.model.Player;
 public class LeaderboardFragment extends Fragment {
 
     private Boolean isLeaderboardCreated = false;
+    HashMap<String, HashMap<String, TextView>> leaderboardHashMap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,8 +53,10 @@ public class LeaderboardFragment extends Fragment {
                 HashMap<String, Player> players = dataSnapshot.getValue(objectListType);
                 if(players == null) return;
                 if(!isLeaderboardCreated){
-                    createLeaderboard(players);
+                    leaderboardHashMap = createLeaderboard(players);
                     isLeaderboardCreated = true;
+                } else {
+                    updateLeaderboard(players);
                 }
             }
 
@@ -64,14 +67,36 @@ public class LeaderboardFragment extends Fragment {
         });
     }
 
-    private void createLeaderboard(HashMap<String, Player> players){
+    private void updateLeaderboard(HashMap<String, Player> players) {
+        if(leaderboardHashMap == null) return;
+        for (Map.Entry<String, Player> entry: players.entrySet()) {
+            Player player = entry.getValue();
+            HashMap<String, TextView> rowHashMap = leaderboardHashMap.get(entry.getKey());
+            updateRow(rowHashMap, player);
+        }
+    }
+
+    private void updateRow(HashMap<String, TextView> rowHashMap, Player player) {
+        if(rowHashMap == null) return;
+        TextView scoreTextView = rowHashMap.get("score");
+        TextView percentageTextView = rowHashMap.get("percentage");
+
+        if(scoreTextView == null || percentageTextView == null) return;
+        scoreTextView.setText(player.score.toString());
+        percentageTextView.setText(player.percentage.toString() + "%");
+    }
+
+    private HashMap<String, HashMap<String, TextView>> createLeaderboard(HashMap<String, Player> players){
         Context context = getContext();
         TableLayout leaderboardLayout = (TableLayout) getActivity().findViewById(R.id.leaderboard);
 
+        HashMap<String, HashMap<String, TextView>> leaderboardHashMap = new HashMap<>();
         for (Map.Entry<String, Player> entry: players.entrySet()) {
             Player player = entry.getValue();
-            addTableRow(context, leaderboardLayout, player.username, player.score, player.percentage);
+            HashMap<String, TextView> rowHashMap = addTableRow(context, leaderboardLayout, player.username, player.score, player.percentage);
+            leaderboardHashMap.put(entry.getKey(), rowHashMap);
         }
+        return leaderboardHashMap;
     }
 
     private HashMap<String, TextView> addTableRow(Context context, TableLayout leaderboardLayout, String username, Integer score, Integer percentage) {
@@ -82,18 +107,17 @@ public class LeaderboardFragment extends Fragment {
         row.setLayoutParams(tableRowParams);
         leaderboardLayout.addView(row);
 
-        TextView usernameTextView = addUsernameTextView(context, row, username);
+        addUsernameTextView(context, row, username);
         TextView scoreTextView = addNumberTextView(context, row, score);
         TextView percentageTextView = addNumberTextView(context, row, percentage);
 
         HashMap<String, TextView> textViewHashMap = new HashMap<>();
-        textViewHashMap.put("username", usernameTextView);
         textViewHashMap.put("score", scoreTextView);
         textViewHashMap.put("percentage", percentageTextView);
         return textViewHashMap;
     }
 
-    private TextView addUsernameTextView(Context context, TableRow row, String username) {
+    private void addUsernameTextView(Context context, TableRow row, String username) {
         TextView usernameTextView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
@@ -110,7 +134,6 @@ public class LeaderboardFragment extends Fragment {
         usernameTextView.setGravity(Gravity.CENTER);
         usernameTextView.setText(username);
         row.addView(usernameTextView);
-        return usernameTextView;
     }
 
     private TextView addNumberTextView(Context context, TableRow row, Integer number) {
