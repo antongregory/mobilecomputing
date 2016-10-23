@@ -2,6 +2,7 @@ package museum.findit.com.myapplication.controller;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.TableLayout;
@@ -61,8 +62,8 @@ public class LeaderboardUIManager {
 
         if(player.username == null || player.score == null || player.percentage == null) return null;
         addUsernameTextView(context, row, player.username);
-        TextView scoreTextView = addScoreTextView(context, row, player.score);
-        TextView percentageTextView = addPercentageTextView(context, row, player.percentage);
+        TextView scoreTextView = addNumberTextView(context, row, player.score, false);
+        TextView percentageTextView = addNumberTextView(context, row, player.percentage, true);
 
         HashMap<String, TextView> textViewHashMap = new HashMap<String, TextView>();
         textViewHashMap.put("score", scoreTextView);
@@ -71,55 +72,44 @@ public class LeaderboardUIManager {
     }
 
     private void addUsernameTextView(Context context, TableRow row, String username) {
-        TextView usernameTextView = new TextView(context);
+        TextView usernameTextView = createDefaultTextView(context);
+        highlightTextView(usernameTextView);
 
-        TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
-        textViewParams.topMargin = 30;
-        usernameTextView.setLayoutParams(textViewParams);
-
-        usernameTextView.setTextColor(Color.parseColor("#ff669900"));
-        usernameTextView.setTextSize(18);
-        usernameTextView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-        usernameTextView.setFocusable(true);
-        usernameTextView.setFocusableInTouchMode(true);
-        usernameTextView.setGravity(Gravity.CENTER);
         usernameTextView.setText(username);
         row.addView(usernameTextView);
     }
 
-    private TextView addScoreTextView(Context context, TableRow row, Integer score) {
-        TextView numberTextView = new TextView(context);
+    private TextView addNumberTextView(Context context, TableRow row, Integer number, Boolean withPercentage) {
+        TextView numberTextView = createDefaultTextView(context);
 
-        TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
-                TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
-        textViewParams.topMargin = 30;
-        numberTextView.setLayoutParams(textViewParams);
+        String text = number.toString();
+        if(withPercentage) text += "%";
+        numberTextView.setText(text);
 
-        numberTextView.setTextColor(Color.BLACK);
-        numberTextView.setTextSize(18);
-        numberTextView.setGravity(Gravity.CENTER);
-        numberTextView.setText(score.toString());
         row.addView(numberTextView);
         return numberTextView;
     }
 
-    private TextView addPercentageTextView(Context context, TableRow row, Integer percentage) {
-        TextView numberTextView = new TextView(context);
+    @NonNull
+    private TextView createDefaultTextView(Context context) {
+        TextView textView = new TextView(context);
 
         TableRow.LayoutParams textViewParams = new TableRow.LayoutParams(
                 TableRow.LayoutParams.WRAP_CONTENT,
                 TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
         textViewParams.topMargin = 30;
-        numberTextView.setLayoutParams(textViewParams);
+        textView.setLayoutParams(textViewParams);
 
-        numberTextView.setTextColor(Color.BLACK);
-        numberTextView.setTextSize(18);
-        numberTextView.setGravity(Gravity.CENTER);
-        numberTextView.setText(percentage.toString() + "%");
-        row.addView(numberTextView);
-        return numberTextView;
+        textView.setTextColor(Color.BLACK);
+        textView.setTextSize(18);
+        textView.setGravity(Gravity.CENTER);
+        return textView;
+    }
+
+    private void highlightTextView(TextView textView) {
+        textView.setTextColor(Color.parseColor("#ff669900"));
+        textView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+        textView.setFocusable(true);
+        textView.setFocusableInTouchMode(true);
     }
 }
