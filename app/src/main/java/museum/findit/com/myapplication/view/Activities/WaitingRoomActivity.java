@@ -1,12 +1,14 @@
 package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+
+import museum.findit.com.myapplication.Helpers.MyApplication;
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
@@ -23,28 +31,25 @@ import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
 
+import static android.R.attr.width;
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
+
 public class WaitingRoomActivity extends AppCompatActivity implements Controller.ViewHandler {
 
     TextView welcomeInfo ;
-
     String gamecode;
-    TextView gamecodeTextView;
     private Controller mController;
     String message;
+    boolean owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
         welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
-        gamecodeTextView =  (TextView) findViewById(R.id.gamecode);
-
-        Intent intent = getIntent();
-        String username = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_USERNAME);
-         gamecode = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_GAMECODE);
-        if(gamecode!=null && !gamecode.equals("")){
-            gamecodeTextView.setText(gamecode);
-        }
+         gamecode = ((MyApplication) this.getApplication()).getGameCode();
+        owner = ((MyApplication) this.getApplication()).isOwner();
 
         if(CurrentUser.isParticipant()){
             View startButton = findViewById(R.id.startbtn);
@@ -74,10 +79,19 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
         numberOfPlayersUpdateIfNeeded();
 
-        initialise();
-        mController=new Controller(this);
 
-        welcomeInfo.setText("Welcome "+username+"!");
+        if(owner){
+            initialise(gamecode);
+        }else{
+            initialise();
+        }
+
+        message = ((MyApplication) this.getApplication()).getUserName();
+
+        welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
+        welcomeInfo.setText("Welcome "+message+"!");
+
+        mController=new Controller(this);
 
     }
 
@@ -109,9 +123,49 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     }
 
     private void initialise(){
-        welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
-        welcomeInfo.setText("Welcome "+message+"!");
+        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+        imageView.setVisibility(View.INVISIBLE);
+        TextView description = (TextView) findViewById(R.id.info);
+        description.setVisibility(View.INVISIBLE);
     }
+
+    private void initialise(String code){
+
+
+        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+        try {
+            Bitmap bitmap = encodeAsBitmap(code);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    Bitmap encodeAsBitmap(String str) throws WriterException {
+        BitMatrix result;
+        try {
+            result = new MultiFormatWriter().encode(str,
+                    BarcodeFormat.QR_CODE, 500, 500, null);
+        } catch (IllegalArgumentException iae) {
+            // Unsupported format
+            return null;
+        }
+        int w = result.getWidth();
+        int h = result.getHeight();
+        int[] pixels = new int[w * h];
+        for (int y = 0; y < h; y++) {
+            int offset = y * w;
+            for (int x = 0; x < w; x++) {
+                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, 500, 0, 0, w, h);
+        return bitmap;
+    }
+
     public void backToLogin(View view) {
         if(CurrentUser.isOwner()){
             GameOwnerService.cancel();

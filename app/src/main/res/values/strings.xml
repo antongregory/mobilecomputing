@@ -3,7 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
 
 
-    <string name="waitingInfo">You can invite people to this game by using this code: </string>
+    <string name="waitingInfo">You can invite people to this game by using this QR code: </string>
 
 
     <string name="title_activity_game_activiry">GameActiviry</string>

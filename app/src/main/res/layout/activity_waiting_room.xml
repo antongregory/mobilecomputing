@@ -36,22 +36,18 @@
             android:text="@string/waitingInfo"
             android:layout_marginTop="10dp" />
 
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/gamecode"
-            android:text="yWu1d3"
-            android:layout_marginTop="30dp"
-            android:textStyle="normal|bold"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="24sp" />
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+            android:layout_margin="30dp"
+            android:id="@+id/qrCode" />
 
         <TextView
             android:text="3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/numberOfPlayers"
-            android:layout_marginTop="100dp"
             android:textSize="70dp"
             android:textColor="#000000"
             android:textAlignment="center" />
