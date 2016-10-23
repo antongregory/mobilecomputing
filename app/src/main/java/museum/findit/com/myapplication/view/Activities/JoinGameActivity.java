@@ -17,19 +17,14 @@ import com.google.zxing.integration.android.IntentResult;
 
 import org.w3c.dom.Text;
 
+import museum.findit.com.myapplication.Helpers.MyApplication;
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.Controller;
 
 public class JoinGameActivity extends AppCompatActivity implements Controller.ViewHandler{
 
     String username;
-    public final static String EXTRA_MESSAGE_USERNAME = "user_name";
-    public final static String EXTRA_MESSAGE_GAMECODE = "gamecode";
-
     String gameCode;
-    private EditText editText;
-
-
     private Controller mController;
     TextView welcome;
 
@@ -38,9 +33,8 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_game);
         welcome = (TextView) findViewById(R.id.welcomeTxt);
-        Intent intent = getIntent();
 
-         username = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_USERNAME);
+         username = ((MyApplication) this.getApplication()).getUserName();
 
         mController=new Controller(this);
     }
@@ -50,6 +44,8 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
     public void createGameRoom(View view) {
         String createdGameCode = mController.createGameAction();
         gameCode = createdGameCode;
+        ((MyApplication) this.getApplication()).setOwner(true);
+        ((MyApplication) this.getApplication()).setGameCode(gameCode);
         onSucess(WaitingRoomActivity.class);
     }
 
@@ -90,7 +86,11 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
             else {
 
                 Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
-                startGame(result.getContents());
+                String code = result.getContents();
+                ((MyApplication) this.getApplication()).setOwner(false);
+
+                ((MyApplication) this.getApplication()).setGameCode(code);
+                startGame(code);
 
             }
         }
@@ -106,8 +106,6 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
     public void onSucess(Class view){
 
         Intent intent = new Intent(this, view);
-        intent.putExtra(EXTRA_MESSAGE_USERNAME, username);
-        intent.putExtra(EXTRA_MESSAGE_GAMECODE, gameCode);
         startActivity(intent);
     }
 

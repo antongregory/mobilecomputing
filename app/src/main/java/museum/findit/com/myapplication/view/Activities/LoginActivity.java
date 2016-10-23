@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import museum.findit.com.myapplication.Helpers.MyApplication;
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.controller.Controller;
 
@@ -20,7 +21,6 @@ import museum.findit.com.myapplication.controller.Controller;
 public class LoginActivity extends AppCompatActivity implements Controller.ViewHandler, Animation.AnimationListener {
 
 
-    public final static String EXTRA_MESSAGE_USERNAME = "user_name";
     EditText userName ;
     String name;
     private Controller mController;
@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
 
     public void enterWaitingRoom(View view) {
          name = userName.getText().toString();
+        ((MyApplication) this.getApplication()).setUsername(name);
         mController.loginAction(name);
 
     }
@@ -72,7 +73,6 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
     @Override
     public void onSucess(Class view) {
         Intent intent = new Intent(this, view);
-        intent.putExtra(EXTRA_MESSAGE_USERNAME, name);
         startActivity(intent);
     }
 

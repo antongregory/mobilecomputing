@@ -23,6 +23,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import museum.findit.com.myapplication.Helpers.MyApplication;
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
@@ -37,21 +38,18 @@ import static android.graphics.Color.WHITE;
 public class WaitingRoomActivity extends AppCompatActivity implements Controller.ViewHandler {
 
     TextView welcomeInfo ;
-
     String gamecode;
-    TextView gamecodeTextView;
     private Controller mController;
     String message;
+    boolean owner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting_room);
         welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
-        Intent intent = getIntent();
-        String username = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_USERNAME);
-         gamecode = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_GAMECODE);
-
+         gamecode = ((MyApplication) this.getApplication()).getGameCode();
+        owner = ((MyApplication) this.getApplication()).isOwner();
 
         if(CurrentUser.isParticipant()){
             View startButton = findViewById(R.id.startbtn);
@@ -81,10 +79,19 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
         numberOfPlayersUpdateIfNeeded();
 
-        initialise(gamecode);
-        mController=new Controller(this);
 
-        welcomeInfo.setText("Welcome "+username+"!");
+        if(owner){
+            initialise(gamecode);
+        }else{
+            initialise();
+        }
+
+        message = ((MyApplication) this.getApplication()).getUserName();
+
+        welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
+        welcomeInfo.setText("Welcome "+message+"!");
+
+        mController=new Controller(this);
 
     }
 
@@ -115,9 +122,15 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         return super.dispatchKeyEvent(event);
     }
 
+    private void initialise(){
+        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+        imageView.setVisibility(View.INVISIBLE);
+        TextView description = (TextView) findViewById(R.id.info);
+        description.setVisibility(View.INVISIBLE);
+    }
+
     private void initialise(String code){
-        welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
-        welcomeInfo.setText("Welcome "+message+"!");
+
 
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         try {
