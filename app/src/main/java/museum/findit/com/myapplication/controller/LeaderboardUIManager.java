@@ -34,7 +34,8 @@ public class LeaderboardUIManager {
         TextView scoreTextView = rowHashMap.get("score");
         TextView percentageTextView = rowHashMap.get("percentage");
 
-        if (scoreTextView == null || percentageTextView == null) return;
+        if (scoreTextView == null || percentageTextView == null ||
+                player.score == null || player.percentage == null) return;
         scoreTextView.setText(player.score.toString());
         percentageTextView.setText(player.percentage.toString() + "%");
     }
