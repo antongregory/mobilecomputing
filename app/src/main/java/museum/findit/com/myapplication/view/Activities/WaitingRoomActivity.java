@@ -1,12 +1,14 @@
 package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +18,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+
 import museum.findit.com.myapplication.R;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
+
+import static android.R.attr.width;
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
 
 public class WaitingRoomActivity extends AppCompatActivity implements Controller.ViewHandler {
 
@@ -74,7 +85,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
         numberOfPlayersUpdateIfNeeded();
 
-        initialise();
+        initialise("hahahaha");
         mController=new Controller(this);
 
         welcomeInfo.setText("Welcome "+username+"!");
@@ -108,10 +119,44 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         return super.dispatchKeyEvent(event);
     }
 
-    private void initialise(){
+    private void initialise(String code){
         welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
         welcomeInfo.setText("Welcome "+message+"!");
+
+        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+        try {
+            Bitmap bitmap = encodeAsBitmap(code);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
     }
+
+
+
+    Bitmap encodeAsBitmap(String str) throws WriterException {
+        BitMatrix result;
+        try {
+            result = new MultiFormatWriter().encode(str,
+                    BarcodeFormat.QR_CODE, 500, 500, null);
+        } catch (IllegalArgumentException iae) {
+            // Unsupported format
+            return null;
+        }
+        int w = result.getWidth();
+        int h = result.getHeight();
+        int[] pixels = new int[w * h];
+        for (int y = 0; y < h; y++) {
+            int offset = y * w;
+            for (int x = 0; x < w; x++) {
+                pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
+            }
+        }
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        bitmap.setPixels(pixels, 0, 500, 0, 0, w, h);
+        return bitmap;
+    }
+
     public void backToLogin(View view) {
         if(CurrentUser.isOwner()){
             GameOwnerService.cancel();
