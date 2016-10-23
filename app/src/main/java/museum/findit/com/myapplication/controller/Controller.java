@@ -84,14 +84,19 @@ public class Controller {
         });
     }
 
-    public void createGameAction(){
+    /**
+     *
+     * @return game code
+     */
+    public String createGameAction(){
 
         //Call the corresponding service
         //on sucess load the view
         String username = ItemManager.getInstance().getUserName();
-        GameOwnerService.create(username);
+        String gameCode = GameOwnerService.create(username);
         CurrentUser.setAsOwner();
-        viewListener.onSucess(WaitingRoomActivity.class);
+
+        return gameCode;
     }
 
 

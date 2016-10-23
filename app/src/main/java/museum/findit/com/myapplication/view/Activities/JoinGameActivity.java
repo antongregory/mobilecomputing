@@ -12,11 +12,10 @@ import museum.findit.com.myapplication.controller.Controller;
 
 public class JoinGameActivity extends AppCompatActivity implements Controller.ViewHandler{
 
-    String message;
+    String username;
     public final static String EXTRA_MESSAGE_USERNAME = "user_name";
     public final static String EXTRA_MESSAGE_GAMECODE = "gamecode";
     String gameCode;
-    public final static String EXTRA_MESSAGE = "name";
     private EditText editText;
     private Controller mController;
 
@@ -26,7 +25,7 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
         setContentView(R.layout.activity_join_game);
 
         Intent intent = getIntent();
-         message = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_USERNAME);
+         username = intent.getStringExtra(LoginActivity.EXTRA_MESSAGE_USERNAME);
         initialise();
         mController=new Controller(this);
     }
@@ -37,17 +36,21 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
 
 
     public void createGameRoom(View view) {
-        mController.createGameAction();
+        String createdGameCode = mController.createGameAction();
+        gameCode = createdGameCode;
+        onSucess(WaitingRoomActivity.class);
     }
 
     public void joinGameRoom(View view) {
-        mController.joinGameAction(editText.getText().toString());
+        gameCode = editText.getText().toString();
+        mController.joinGameAction(gameCode);
     }
 
     public void onSucess(Class view){
 
         Intent intent = new Intent(this, view);
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra(EXTRA_MESSAGE_USERNAME, username);
+        intent.putExtra(EXTRA_MESSAGE_GAMECODE, gameCode);
         startActivity(intent);
     }
 

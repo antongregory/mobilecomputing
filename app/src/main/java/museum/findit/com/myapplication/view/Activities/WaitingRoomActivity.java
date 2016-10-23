@@ -40,12 +40,10 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         gamecodeTextView =  (TextView) findViewById(R.id.gamecode);
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_USERNAME);
+        String username = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_USERNAME);
          gamecode = intent.getStringExtra(JoinGameActivity.EXTRA_MESSAGE_GAMECODE);
-        if(gamecode!=null&&!gamecode.equals("")){
+        if(gamecode!=null && !gamecode.equals("")){
             gamecodeTextView.setText(gamecode);
-        }else{
-
         }
 
         if(CurrentUser.isParticipant()){
@@ -79,7 +77,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         initialise();
         mController=new Controller(this);
 
-        welcomeInfo.setText("Welcome "+name+"!");
+        welcomeInfo.setText("Welcome "+username+"!");
 
     }
 
