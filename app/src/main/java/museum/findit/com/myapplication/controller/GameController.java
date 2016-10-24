@@ -1,7 +1,13 @@
 package museum.findit.com.myapplication.controller;
 
+import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import museum.findit.com.myapplication.WebService.ImageService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.model.Question;
@@ -61,13 +67,39 @@ public class GameController extends Controller{
 
     }
 
+    /**
+     *
+     * @param imageName name of the image
+     */
+    public void getImageUrl(final String imageName){
+        Log.d("DEBUG","image urls of  "+imageName);
+
+        ImageService.getUrl(imageName).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+
+                    gameListener.setImage(task.getResult().toString());
+                }
+            }
+        });
+
+
+
+
+
+    }
+
+
+
     public interface GameListener extends ViewHandler{
         public void loadGameItem(ItemModel item);
+        public void setImage(String url);
         public void loadQuizItem(Question quiz);
         public void highLightCorrect();
         public void highLightWrong(String answer);
     }
-    //load barcode details
+
 
 
 

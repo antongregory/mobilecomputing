@@ -6,4 +6,5 @@
     <color name="buttonColor">#85cd00</color>
     <color name="textColor">#FFFFFF</color>
     <color name="cancelColor">#Cc1414</color>
+    <color name="defaultButtonColor">#a9a9a9</color>
 </resources>

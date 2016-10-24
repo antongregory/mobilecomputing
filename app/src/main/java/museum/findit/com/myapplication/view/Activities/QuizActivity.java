@@ -141,6 +141,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         choiceA=(Button) findViewById(R.id.choiceA);
         choiceB=(Button) findViewById(R.id.choiceB);
         choiceC=(Button) findViewById(R.id.choiceC);
+
         initAnimation();
 
     }
@@ -188,8 +189,13 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     }
 
     @Override
-    public void loadQuizItem(Question quiz) {
+    public void setImage(String url) {
 
+    }
+
+    @Override
+    public void loadQuizItem(Question quiz) {
+        resetButton();
         questionTextView.setText(quiz.getQuestion());
         choiceA.setText(quiz.getChoiceA());
         choiceB.setText(quiz.getChoiceB());
@@ -239,6 +245,14 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         finishQuiz();
     }
 
+    private void resetButton(){
+        choiceA.clearAnimation();
+        choiceB.clearAnimation();
+        choiceC.clearAnimation();
+        choiceA.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
+        choiceB.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
+        choiceC.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
+    }
 
     private void finishQuiz(){
         final Handler handler = new Handler();

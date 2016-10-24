@@ -6,7 +6,11 @@ import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
+import museum.findit.com.myapplication.WebService.GameService;
 
 /**
  * Created by antongregory on 13/10/2016.
@@ -19,6 +23,7 @@ public class ItemManager implements Manager,QuestionHandler{
     Question question;
     ArrayList<Question> questionList;
     ArrayList<ItemModel> itemCollection;
+    ArrayList<ItemModel> completeCollection;
 
     int currentItemIndex,currentQuestionIndex;
 
@@ -28,7 +33,7 @@ public class ItemManager implements Manager,QuestionHandler{
     //// TODO: 19/10/2016   ADD shared preference
 
         ItemManager(){
-            loadDummyData();
+            //loadDummyData();
             currentItemIndex=0;
             currentQuestionIndex=0;
         }
@@ -52,53 +57,22 @@ public class ItemManager implements Manager,QuestionHandler{
 
 
 
-    public void loadList(ArrayList itemCollection){
+    public void loadList(ArrayList<ItemModel> itemcollection,Integer seed){
 
-        itemCollection=itemCollection;
+
+        completeCollection=itemcollection;
+        if (seed!=null)
+        Collections.shuffle(completeCollection, new Random(seed));
+        else
+        Collections.shuffle(completeCollection, new Random(5));
+        Log.d("DEBUG","game seed" +seed);
+        itemCollection= new ArrayList<ItemModel>(completeCollection.subList(0, 5));
+
 
 
     }
 
 
-    public void loadDummyData(){
-
-        ItemModel item=new ItemModel();
-        Question question1=new Question();
-
-        ArrayList<Question> questionList1=new ArrayList<Question>();
-        itemCollection=new ArrayList<>();
-        question1.setQuestion("Which culture does this item belong");
-        question1.setChoiceA("China");
-        question1.setChoiceB("Turkey");
-        question1.setChoiceC("Indonesia");
-        question1.setAnswer("Indonesia");
-
-        questionList1.add(question1);
-
-        item.setBarcodeId("indonesia");
-        item.setDescription("Cultural bg");
-        item.setImage_url("hello");
-        item.setQuestions(questionList1);
-        itemCollection.add(item);
-        //second item
-        ItemModel item2=new ItemModel();
-        Question question2=new Question();
-
-        ArrayList<Question> questionList2=new ArrayList<Question>();
-        question2.setQuestion("Who rode this boat");
-        question2.setChoiceA("Trump");
-        question2.setChoiceB("Clinton");
-        question2.setChoiceC("Zlatan");
-        question2.setAnswer("Zlatan");
-
-        questionList2.add(question2);
-
-        item2.setBarcodeId("zlatan");
-        item2.setDescription("Cultural bg");
-        item2.setImage_url("hello");
-        item2.setQuestions(questionList2);
-        itemCollection.add(item2);
-    }
 
     public int count(){
 
@@ -145,7 +119,7 @@ public class ItemManager implements Manager,QuestionHandler{
             return item;
         }
         else{
-            //// TODO: 2016-10-21  reset current item index 
+            currentItemIndex=0;
             return null;
         }
 

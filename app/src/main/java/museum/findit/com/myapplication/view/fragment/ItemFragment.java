@@ -2,7 +2,9 @@ package museum.findit.com.myapplication.view.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +14,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
+
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.ImageService;
 import museum.findit.com.myapplication.controller.GameController;
 import museum.findit.com.myapplication.controller.TimerService;
 import museum.findit.com.myapplication.model.ItemManager;
@@ -82,8 +89,33 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
     @Override
     public void loadGameItem(ItemModel item) {
         Log.d("DEBUG","loading item "+item);
+        Log.d("DEBUG","item details"+item.getBarcodeId());
+        Log.d("DEBUG","item details"+item.getDescription());
+        Log.d("DEBUG","item details"+item.getImage_url());
+        Log.d("DEBUG","item details"+item.getQuestions());
+       // gameController.sample();
+        gameController.getImageUrl(item.getImage_url());
 
     }
+
+    private void sample(){
+        ImageService.getUrl("item-1.jpg").addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+                    Log.d("ImageLog","jvhvhv"+ task.getResult().toString());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void setImage(String url) {
+
+        Picasso.with(getActivity()).load(url).into(imageView);
+
+    }
+
 
     @Override
     public void loadQuizItem(Question quiz) {

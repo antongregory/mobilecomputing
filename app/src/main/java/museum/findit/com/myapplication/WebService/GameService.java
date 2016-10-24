@@ -21,7 +21,7 @@ public class GameService {
     // TODO: gameId and username should be persistence even when app is turned off
     static String gameId;
     static String username;
-    static Integer seed;
+    public static Integer seed;
 
     public static void listenNumberOfPlayers(ValueEventListener numberOfPlayersListener){
         final DatabaseReference numberOfPlayersDatabase = gamesDatabase.child(gameId).child("numberOfPlayers");

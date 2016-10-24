@@ -1,6 +1,7 @@
 package museum.findit.com.myapplication.controller;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
+import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.WebService.ItemService;
 import museum.findit.com.myapplication.WebService.LoginService;
 import museum.findit.com.myapplication.model.CurrentUser;
@@ -36,13 +38,11 @@ public class Controller {
 
     }
 
-    //login check
-    //start leave
-    //scan bar code & check
-    //load quiz question & load quiz activity
-    //load item and item activity
-
-    //login check
+    /**
+     *checks whether the username entered is acceptable or not. If acceptable saves it in the
+     * backend . If not accetable view will be presented to the user
+     * @param username
+     */
     public void loginAction(final String username){
         if(username.trim().length()==0){
             viewListener.onFailure("User name cannot be empty");
@@ -68,8 +68,6 @@ public class Controller {
 
     public void joinGameAction(String gameCode){
 
-        //Call the corresponding service
-        //on sucess load the view
         String username = ItemManager.getInstance().getUserName();
         GameParticipantService.join(gameCode, username).addOnCompleteListener(new OnCompleteListener<Boolean>() {
             @Override
@@ -100,30 +98,47 @@ public class Controller {
     }
 
 
+
     public void startLoadingData(){
-            ItemManager.getInstance().loadDummyData();
+
+        Log.d("DEBUG","in load data");
+
         ItemService.getAll().addOnCompleteListener(new OnCompleteListener<ArrayList<ItemModel>>() {
             @Override
             public void onComplete(@NonNull Task<ArrayList<ItemModel>> task) {
+
                 if(task.isSuccessful()){
-                    // TODO: 2016-10-23 use items instead of dummy data 
+                    // TODO: 2016-10-23 use items instead of dummy data
+
                     ArrayList<ItemModel> items = task.getResult();
+                    Log.d("DEBUG","in load data"+items.size());
+                    ItemManager.getInstance().loadList(items,GameService.seed);
+                    viewListener.onSucess(GameActiviry.class);
+
+                }
+                else {
+                    Log.d("DEBUG","loading of data unsuccessful");
                 }
             }
         });
-        viewListener.onSucess(GameActiviry.class);
-        //initiate service and pass data to model
+
+
     }
 
+
+    /**
+     *
+     * @param barcode  qr code of the item
+     */
     public void compareBarCode(String barcode){
 
-   /*if(ItemManager.getInstance().compareBarCode(barcode)){
+   if(ItemManager.getInstance().compareBarCode(barcode)){
             viewListener.onSucess(QuizActivity.class);
         }
         else{
-            viewListener.onFailure();
-        }*/
-        viewListener.onSucess(QuizActivity.class);
+            viewListener.onFailure("In correct item scanned");
+        }
+
     }
 
     public interface ViewHandler {
