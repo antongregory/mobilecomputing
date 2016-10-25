@@ -22,7 +22,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
-import android.widget.Toast;
 
 import museum.findit.com.myapplication.controller.GameController;
 import museum.findit.com.myapplication.model.ItemModel;
@@ -63,8 +62,8 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         intentFilter.addAction(RECEIVE_TIME);
         bManager.registerReceiver(bReceiver, intentFilter);
 
-        //start timer service
-        startService(new Intent(this, QuizTimerService.class));
+       /* //start timer service
+        startService(new Intent(this, QuizTimerService.class));*/
     }
 
     @Override
@@ -186,7 +185,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         choiceA.setText(quiz.getChoiceA());
         choiceB.setText(quiz.getChoiceB());
         choiceC.setText(quiz.getChoiceC());
-
+        startService(new Intent(this, QuizTimerService.class));
         Log.d("DEBUG","loading item "+quiz);
     }
 
@@ -197,7 +196,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     @Override
     public void highLightCorrect() {
-        Toast.makeText(this, "right choice"+selectedChoice.getText(),Toast.LENGTH_LONG).show();
+
         mController.saveQuizScore(quizTimerTextView.getText().toString());
         selectedChoice.setBackgroundColor(getResources().getColor(R.color.buttonColor));
         finishQuiz();
@@ -210,13 +209,13 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         switch(buttonId) {
             case R.id.choiceA:
                 choiceA.startAnimation(mAnimation);
-                Toast.makeText(this, "right choice a",Toast.LENGTH_LONG).show();
+
                 choiceA.setBackgroundColor(getResources().getColor(R.color.buttonColor));
 
                 break;
             case R.id.choiceB:
                 choiceB.startAnimation(mAnimation);
-                Toast.makeText(this, "right choice b",Toast.LENGTH_LONG).show();
+
 
                 choiceB.setBackgroundColor(getResources().getColor(R.color.buttonColor));
 
@@ -224,14 +223,14 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
                 break;
             case R.id.choiceC:
                 choiceC.startAnimation(mAnimation);
-                Toast.makeText(this, "right choice c",Toast.LENGTH_LONG).show();
+
 
                 choiceC.setBackgroundColor(getResources().getColor(R.color.buttonColor));
 
                 break;
         }
 
-        Toast.makeText(this, "wrong "+selectedChoice.getText(),Toast.LENGTH_LONG).show();
+
         selectedChoice.setBackgroundColor(getResources().getColor(R.color.cancelColor));
         finishQuiz();
     }
@@ -243,14 +242,17 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         choiceA.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
         choiceB.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
         choiceC.setBackgroundColor(getResources().getColor(R.color.defaultButtonColor));
+
     }
 
     private void finishQuiz(){
         final Handler handler = new Handler();
+        stopService(new Intent(this, QuizTimerService.class));
         Log.d("DEBUG","handler");
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
              mController.startQuiz();
             }
         }, 1500);

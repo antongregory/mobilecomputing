@@ -102,8 +102,6 @@ public class Player {
           order=0;
           percentage=0;
           score=0;
-          username="";
-          gameId="";
          noOfQuestionsAnswered=0;
          totalNoOfQuestions=0;
     }

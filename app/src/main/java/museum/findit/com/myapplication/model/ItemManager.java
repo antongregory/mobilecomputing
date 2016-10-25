@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.support.v4.view.MenuItemCompat;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,10 +25,10 @@ public class ItemManager implements Manager, QuestionHandler {
 
     ArrayList<ItemModel> itemCollection;
     ArrayList<ItemModel> completeCollection;
-
+    SharedPreferences mPrefs;
     public Player playerProfile;
     private static ItemManager itemManager;
-
+    public final String PLAYER="PLAYER_PROFILE";
 
     ItemManager() {
 
@@ -63,6 +65,20 @@ public class ItemManager implements Manager, QuestionHandler {
 
     }
 
+    public void savePlayerProfile(){
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(playerProfile); // myObject - instance of MyObject
+        prefsEditor.putString(PLAYER, json);
+        prefsEditor.commit();
+    }
+
+    public Player loadPlayerProfile(){
+        Gson gson = new Gson();
+        String json = mPrefs.getString(PLAYER, "");
+        Player player = gson.fromJson(json, Player.class);
+        return player;
+    }
 
     public int count() {
 
@@ -120,7 +136,7 @@ public class ItemManager implements Manager, QuestionHandler {
 
     @Override
     public boolean checkQuestionExist() {
- 
+
         Log.d("DEBUG", "current item code " + playerProfile.getCurrentItemIndex());
 
         if (playerProfile.getCurrentQuestionIndex() < getCurrentItem().getQuestions().size())
