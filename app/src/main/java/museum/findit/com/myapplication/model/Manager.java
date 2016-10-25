@@ -13,8 +13,8 @@ public interface Manager {
 
     public boolean checkNextItem();
     public ItemModel getItem();
-    public void saveItems();
-    public void saveScore(int items);
+    public boolean compareBarCode(String barcode);
+
 
 
 

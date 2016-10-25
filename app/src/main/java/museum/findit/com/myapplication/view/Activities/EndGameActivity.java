@@ -17,7 +17,7 @@ public class EndGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
-        Log.d("GameLog","perce"+ ItemManager.getInstance().getPercentage());
+        Log.d("GameLog","perce"+ ItemManager.getInstance().getPlayerProfile().getPercentage());
         Log.d("GameLog","gae id "+ GameService.gameId);
     }
 

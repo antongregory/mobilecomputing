@@ -13,6 +13,7 @@ import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.WebService.ImageService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
+import museum.findit.com.myapplication.model.Player;
 import museum.findit.com.myapplication.model.Question;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 
@@ -33,15 +34,17 @@ public class GameController extends Controller{
 
     public void startQuiz(){
         Question question=ItemManager.getInstance().loadNextQuestion();
+        Player playerProfile=ItemManager.getInstance().getPlayerProfile();
         Log.d("DEBUG"," questiony"+question);
             if (question!=null){
                 gameListener.loadQuizItem(question);
-                gameListener.updateScoreView((int) ItemManager.getInstance().getCurrentScore());
+
+                gameListener.updateScoreView((int) playerProfile.getCurrentScore());
             }
 
         else{
-                double score=ItemManager.getInstance().getCurrentScore();
-                int percentage=ItemManager.getInstance().getPercentage();
+                double score=playerProfile.getCurrentScore();
+                int percentage=playerProfile.getPercentage();
                 GameService.updateScore((int) score,percentage);
                 gameListener.onSucess(GameActiviry.class);
 
@@ -53,10 +56,10 @@ public class GameController extends Controller{
 
     public void updateItem(){
        ItemModel item= ItemManager.getInstance().getItem();
-
+        Player playerProfile=ItemManager.getInstance().getPlayerProfile();
         if(item!=null){
             gameListener.loadGameItem(item);
-            gameListener.updateScoreView((int) ItemManager.getInstance().getCurrentScore());
+            gameListener.updateScoreView((int) playerProfile.getCurrentScore());
         }
 
         else
@@ -71,12 +74,13 @@ public class GameController extends Controller{
         Log.d("QuizLog","time "+timeInSeconds);
         double timeTaken= TimeUtils.timerConverter(timeInSeconds);
         double score=GameScore.quizScoreCalculator(timeTaken);
-        ItemManager.getInstance().setCurrentScore(score);
+        Player playerProfile=ItemManager.getInstance().getPlayerProfile();
+        playerProfile.setCurrentScore(score);
         ItemManager.getInstance().addAnsweredQuestions(true);
-        int correct=ItemManager.getInstance().getNoOfQuestionsAnswered();
-        int total=ItemManager.getInstance().getTotalNoOfQuestions();
+        int correct=playerProfile.getNoOfQuestionsAnswered();
+        int total=playerProfile.getTotalNoOfQuestions();
         int percentage=GameScore.percentageCalculator(total,correct);
-        ItemManager.getInstance().setPercentage(percentage);
+        playerProfile.setPercentage(percentage);
     }
 
 

@@ -19,6 +19,7 @@ import museum.findit.com.myapplication.WebService.LoginService;
 import museum.findit.com.myapplication.model.CurrentUser;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
+import museum.findit.com.myapplication.model.Player;
 import museum.findit.com.myapplication.view.Activities.GameActiviry;
 import museum.findit.com.myapplication.view.Activities.JoinGameActivity;
 import museum.findit.com.myapplication.view.Activities.QuizActivity;
@@ -146,7 +147,9 @@ public class Controller {
 
         double seconds=TimeUtils.timerConverter(minutesAndSeconds);
         double score= GameScore.itemScoreCalculator(seconds);
-        ItemManager.getInstance().setCurrentScore(score);
+        Player playerProfile;
+        playerProfile=ItemManager.getInstance().playerProfile;
+        playerProfile.setCurrentScore(score);
     }
 
 

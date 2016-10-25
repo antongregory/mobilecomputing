@@ -18,38 +18,28 @@ import museum.findit.com.myapplication.WebService.GameService;
 
 public class ItemManager implements Manager, QuestionHandler {
 
-    private String username;
+
     ItemModel item;
-    int  percentage;
-    Question question;
-    ArrayList<Question> questionList;
+
     ArrayList<ItemModel> itemCollection;
     ArrayList<ItemModel> completeCollection;
-    int noOfQuestionsAnswered,totalNoOfQuestions;
 
-    int currentItemIndex, currentQuestionIndex;
-    double currentScore;
-
-    SharedPreferences itemListData;
+    public Player playerProfile;
     private static ItemManager itemManager;
 
 
     ItemManager() {
 
-        currentItemIndex = 0;
-        currentQuestionIndex = 0;
+
+        playerProfile=new Player();
 
     }
 
-
-    public void setUserName(String username) {
-        this.username = username;
-        Log.d("DEBUG", "username is " + username);
+    public Player getPlayerProfile(){
+        return playerProfile;
     }
 
-    public String getUserName() {
-        return username;
-    }
+
 
     public static ItemManager getInstance() {
         if (itemManager == null) {
@@ -57,32 +47,7 @@ public class ItemManager implements Manager, QuestionHandler {
         }
         return itemManager;
     }
-    public void setPercentage(int percentageValue){
-               percentage=percentageValue;
-    }
 
-    public int getPercentage(){
-
-        return percentage;
-    }
-    public void setCurrentScore(double score){
-        currentScore+=score;
-    }
-
-    public double getCurrentScore(){
-        return currentScore;
-    }
-    public int getCurrentItemIndex() {
-
-        return currentItemIndex;
-    }
-
-    public int getCurrentQuestionIndex() {
-
-        return currentQuestionIndex;
-    }
-
-        //// TODO: 25/10/2016  clean code 
     //// TODO: 25/10/2016 add persistence to the fields required 
     public void loadList(ArrayList<ItemModel> itemcollection, Integer seed) {
         completeCollection = itemcollection;
@@ -93,10 +58,7 @@ public class ItemManager implements Manager, QuestionHandler {
         Log.d("DEBUG", "game seed" + seed);
         itemCollection = new ArrayList<ItemModel>(completeCollection.subList(0, 5));
         
-        setPercentage(0);
-        setCurrentScore(0);
-        noOfQuestionsAnswered=0;
-        totalNoOfQuestions=0;
+        playerProfile.clear();
 
 
     }
@@ -109,17 +71,23 @@ public class ItemManager implements Manager, QuestionHandler {
 
     @Override
     public boolean checkNextItem() {
-        if (currentItemIndex < count())
+        if (playerProfile.getCurrentItemIndex() < count())
             return true;
         else
             return false;
     }
 
+    /**
+     *
+     * @param barcode of the item to be compared
+     * @return true if barcode is right and false if barcode is  wrong
+     */
+    @Override
     public boolean compareBarCode(String barcode) {
         String barcodeFromItem = "";
 
         if (checkNextItem()) {
-            barcodeFromItem = itemCollection.get(currentItemIndex).getBarcodeId();
+            barcodeFromItem = itemCollection.get(playerProfile.getCurrentItemIndex()).getBarcodeId();
 
             if (barcodeFromItem.equals(barcode)) {
                 return true;
@@ -132,46 +100,30 @@ public class ItemManager implements Manager, QuestionHandler {
         }
     }
 
-    private void syncItemNumber() {
-        //stores the item index
-    }
-
 
     @Override
     public ItemModel getItem() {
 
-        if (currentItemIndex < count()) {
-            item = itemCollection.get(currentItemIndex);
+        if (playerProfile.getCurrentItemIndex() < count()) {
+            item = itemCollection.get(playerProfile.getCurrentItemIndex());
 
-            item.setOrderAndCount(currentItemIndex + 1 + "/" + count());
+            item.setOrderAndCount(playerProfile.getCurrentItemIndex() + 1 + "/" + count());
             return item;
         } else {
-            currentItemIndex = 0;
+            playerProfile.setCurrentItemIndex(0);
             return null;
         }
 
 
     }
 
-    @Override
-    public void saveItems() {
-        // save the items in the sharedpreference
-
-
-    }
-
-    @Override
-    public void saveScore(int score) {
-
-        //save score to sharedpreference
-    }
 
     @Override
     public boolean checkQuestionExist() {
-        Log.d("DEBUG", "currentQuestionIndex code " + currentQuestionIndex);
-        Log.d("DEBUG", "current item code " + currentItemIndex);
-        Log.d("DEBUG", "count item code " + count());
-        if (currentQuestionIndex < itemCollection.get(currentItemIndex).getQuestions().size())
+ 
+        Log.d("DEBUG", "current item code " + playerProfile.getCurrentItemIndex());
+
+        if (playerProfile.getCurrentQuestionIndex() < getCurrentItem().getQuestions().size())
             return true;
         else
             return false;
@@ -181,54 +133,65 @@ public class ItemManager implements Manager, QuestionHandler {
     public Question loadNextQuestion() {
 
         Question question;
+        int currentItemIndex=playerProfile.getCurrentItemIndex();
+        int currentQuestionIndex=playerProfile.getCurrentQuestionIndex();
+        int totalNoOfQuestions=playerProfile.getTotalNoOfQuestions();
         if (checkQuestionExist()) {
 
-            question = itemCollection.get(currentItemIndex).getQuestions().get(currentQuestionIndex);
+            question = getCurrentItem().getQuestions().get(currentQuestionIndex);
             int count =getCurrentItem().getQuestions().size();
             question.setOrderAndCount(currentQuestionIndex + 1 + "/" + count);
             totalNoOfQuestions++;
+            playerProfile.setTotalNoOfQuestions(totalNoOfQuestions);
             return question;
         } else {
-            currentQuestionIndex = 0;
+
+            playerProfile.setCurrentQuestionIndex(0);
             currentItemIndex++;
+            playerProfile.setCurrentItemIndex(currentItemIndex);
             return null;
         }
     }
 
     public void addAnsweredQuestions(boolean hasAnswered){
+        int noOfQuestionsAnswered=playerProfile.getNoOfQuestionsAnswered();;
         if (hasAnswered==true)
-        {   noOfQuestionsAnswered++;
+        {
 
+            noOfQuestionsAnswered++;
+            playerProfile.setNoOfQuestionsAnswered(noOfQuestionsAnswered);
         }
     }
 
-    public int getNoOfQuestionsAnswered(){
-
-        return noOfQuestionsAnswered;
-    }
-
-    public int getTotalNoOfQuestions(){
-
-        return totalNoOfQuestions;
-    }
-
-
-
-
+    /**
+     *
+     * @return returns the current item if item exist and returns null if there is no item
+     *
+     *
+     */
     private ItemModel getCurrentItem() {
-        if (currentItemIndex < count()) {
+        if (playerProfile.getCurrentItemIndex() < count()) {
 
-            return itemCollection.get(currentItemIndex);
+            return itemCollection.get(playerProfile.getCurrentItemIndex());
         } else
             return null;
     }
 
+    /**
+     *
+     * @return returns the answer of current question and returns null if there is no item
+     *
+     *
+     */
     public String getCurrentQuestionAnswer() {
         String answer;
+        int currentQuestionIndex=playerProfile.getCurrentQuestionIndex();
         Log.d("DEBUG", "question is " + checkQuestionExist());
         if (checkQuestionExist()) {
-            answer = item.getQuestions().get(currentQuestionIndex).getAnswer();
+
+            answer = getCurrentItem().getQuestions().get(currentQuestionIndex).getAnswer();
             currentQuestionIndex++;
+            playerProfile.setCurrentQuestionIndex(currentQuestionIndex);
             return answer;
         } else {
             return null;
@@ -236,14 +199,13 @@ public class ItemManager implements Manager, QuestionHandler {
     }
 
 
-    @Override
-    public boolean checkAnswer(String answer) {
-        ItemModel item = getCurrentItem();
-        boolean result;
-        if (checkQuestionExist())
-            result = item.getQuestions().get(currentQuestionIndex).getAnswer().equals(answer);
-        else
-            return false;
-        return result;
+    public void setUserName(String username) {
+        this.playerProfile.setUsername(username);
+        Log.d("DEBUG", "username is " + username);
     }
+
+    public String getUserName() {
+        return playerProfile.getUsername();
+    }
+
 }

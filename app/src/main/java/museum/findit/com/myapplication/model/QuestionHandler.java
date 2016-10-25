@@ -8,7 +8,7 @@ public interface QuestionHandler {
 
     public boolean checkQuestionExist();
     public Question loadNextQuestion();
-    public boolean checkAnswer(String answer);
+
 
 
 
