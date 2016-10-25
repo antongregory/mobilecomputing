@@ -126,12 +126,17 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         imageView.setVisibility(View.INVISIBLE);
         TextView description = (TextView) findViewById(R.id.info);
+        description.setText("");
         description.setVisibility(View.INVISIBLE);
     }
 
     private void initialise(String code){
 
-
+        ImageView imageView1 = (ImageView) findViewById(R.id.qrCode);
+        imageView1.setVisibility(View.VISIBLE);
+        TextView description = (TextView) findViewById(R.id.info);
+        description.setText(R.string.waitingInfo);
+        description.setVisibility(View.VISIBLE);
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         try {
             Bitmap bitmap = encodeAsBitmap(code);
