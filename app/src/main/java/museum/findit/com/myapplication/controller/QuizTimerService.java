@@ -41,7 +41,7 @@ public class QuizTimerService extends Service {
         public void run()
         {
             seconds++;
-            Log.v("Quiz timer",""+seconds);
+            //Log.v("Quiz timer",""+seconds);
             broadcastIntent();
 
             //     Toast.makeText(ctx, "test", Toast.LENGTH_SHORT).show();

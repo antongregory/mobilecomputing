@@ -19,6 +19,18 @@ public class ItemModel {
 
     String barcodeId;
 
+    public String getOrderAndCount() {
+        return orderAndCount;
+    }
+
+    public void setOrderAndCount(String orderAndCount) {
+        this.orderAndCount = orderAndCount;
+    }
+
+    String orderAndCount;
+
+
+
     public String getImage_url() {
         return image_url;
     }

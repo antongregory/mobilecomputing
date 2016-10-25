@@ -37,12 +37,13 @@ public class TimerService extends Service {
         timer.scheduleAtFixedRate(new mainTask(), 0, 1000);
     }
 
+
     private class mainTask extends TimerTask
     {
         public void run()
         {
             seconds++;
-            Log.v("timer",""+seconds);
+           Log.v("timer",""+seconds);
             broadcastIntent();
 
        //     Toast.makeText(ctx, "test", Toast.LENGTH_SHORT).show();

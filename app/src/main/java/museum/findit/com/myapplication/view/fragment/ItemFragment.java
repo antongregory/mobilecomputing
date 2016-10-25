@@ -54,10 +54,7 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
         View view=inflater.inflate(R.layout.fragment_item, container, false);
         intialise(view);
         gameController.updateItem();
-        itemTextView.setText("2/5");
-
-
-        return view;
+    return view;
     }
 
     private void intialise(View view){
@@ -66,11 +63,7 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
         imageView=(ImageView) view.findViewById(R.id.itemImageView);
     }
 
-    private void loadData(){
 
-        itemTextView.setText(item.getBarcodeId());
-
-    }
 
 
     @Override
@@ -88,26 +81,15 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
 
     @Override
     public void loadGameItem(ItemModel item) {
-        Log.d("DEBUG","loading item "+item);
+
         Log.d("DEBUG","item details"+item.getBarcodeId());
-        Log.d("DEBUG","item details"+item.getDescription());
-        Log.d("DEBUG","item details"+item.getImage_url());
-        Log.d("DEBUG","item details"+item.getQuestions());
-       // gameController.sample();
+
+        itemTextView.setText(item.getOrderAndCount());
         gameController.getImageUrl(item.getImage_url());
 
     }
 
-    private void sample(){
-        ImageService.getUrl("item-1.jpg").addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if(task.isSuccessful()){
-                    Log.d("ImageLog","jvhvhv"+ task.getResult().toString());
-                }
-            }
-        });
-    }
+
 
     @Override
     public void setImage(String url) {
@@ -120,6 +102,12 @@ public class ItemFragment extends Fragment  implements GameController.GameListen
     @Override
     public void loadQuizItem(Question quiz) {
 
+    }
+
+    @Override
+    public void updateScoreView(int score) {
+
+        scoreTextView.setText(""+score);
     }
 
     @Override

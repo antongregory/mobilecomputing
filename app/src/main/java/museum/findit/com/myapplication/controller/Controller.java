@@ -9,6 +9,8 @@ import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
 
+import museum.findit.com.myapplication.Helpers.GameScore;
+import museum.findit.com.myapplication.Helpers.TimeUtils;
 import museum.findit.com.myapplication.WebService.GameOwnerService;
 import museum.findit.com.myapplication.WebService.GameParticipantService;
 import museum.findit.com.myapplication.WebService.GameService;
@@ -140,6 +142,14 @@ public class Controller {
         }
 
     }
+    public void saveItemScore(String minutesAndSeconds){
+
+        double seconds=TimeUtils.timerConverter(minutesAndSeconds);
+        double score= GameScore.itemScoreCalculator(seconds);
+        ItemManager.getInstance().setCurrentScore(score);
+    }
+
+
 
     public interface ViewHandler {
 

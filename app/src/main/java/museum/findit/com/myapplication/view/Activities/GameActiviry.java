@@ -202,6 +202,10 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
 
     @Override
     public void onSucess(Class view) {
+        stopService(new Intent(this, TimerService.class));
+        Log.d("DEBUG","as "+timeText.getText().toString());
+        controller.saveItemScore(timeText.getText().toString());
+
         Intent intent = new Intent(this, view);
         startActivity(intent);
     }

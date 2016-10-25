@@ -7,12 +7,20 @@ package museum.findit.com.myapplication.model;
 public class Question {
 
 
+    public String getOrderAndCount() {
+        return orderAndCount;
+    }
+
+    public void setOrderAndCount(String orderAndCount) {
+        this.orderAndCount = orderAndCount;
+    }
+
     /*
 
-    Handles the actions corresponding to an item
+        Handles the actions corresponding to an item
 
-    */
-
+        */
+    String orderAndCount;
     public String getQuestion() {
         return question;
     }

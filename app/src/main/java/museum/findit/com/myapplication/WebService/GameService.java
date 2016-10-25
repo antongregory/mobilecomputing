@@ -19,7 +19,7 @@ public class GameService {
     static DatabaseReference gamesDatabase = FirebaseDatabase.getInstance().getReference("games");
 
     // TODO: gameId and username should be persistence even when app is turned off
-    static String gameId;
+    public static String gameId;
     static String username;
     public static Integer seed;
 

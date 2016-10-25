@@ -3,10 +3,13 @@ package museum.findit.com.myapplication.view.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
 import museum.findit.com.myapplication.R;
+import museum.findit.com.myapplication.WebService.GameService;
+import museum.findit.com.myapplication.model.ItemManager;
 
 public class EndGameActivity extends AppCompatActivity {
 
@@ -14,6 +17,8 @@ public class EndGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_game);
+        Log.d("GameLog","perce"+ ItemManager.getInstance().getPercentage());
+        Log.d("GameLog","gae id "+ GameService.gameId);
     }
 
     public void restartGame(View view){

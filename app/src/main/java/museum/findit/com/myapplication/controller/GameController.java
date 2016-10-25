@@ -7,6 +7,9 @@ import android.util.Log;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import museum.findit.com.myapplication.Helpers.GameScore;
+import museum.findit.com.myapplication.Helpers.TimeUtils;
+import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.WebService.ImageService;
 import museum.findit.com.myapplication.model.ItemManager;
 import museum.findit.com.myapplication.model.ItemModel;
@@ -31,24 +34,50 @@ public class GameController extends Controller{
     public void startQuiz(){
         Question question=ItemManager.getInstance().loadNextQuestion();
         Log.d("DEBUG"," questiony"+question);
-            if (question!=null)
-        gameListener.loadQuizItem(question);
-        else
-        gameListener.onSucess(GameActiviry.class);
+            if (question!=null){
+                gameListener.loadQuizItem(question);
+                gameListener.updateScoreView((int) ItemManager.getInstance().getCurrentScore());
+            }
+
+        else{
+                double score=ItemManager.getInstance().getCurrentScore();
+                int percentage=ItemManager.getInstance().getPercentage();
+                GameService.updateScore((int) score,percentage);
+                gameListener.onSucess(GameActiviry.class);
+
+            }
+
 
     }
 
 
     public void updateItem(){
        ItemModel item= ItemManager.getInstance().getItem();
-        if(item!=null)
-        gameListener.loadGameItem(item);
+
+        if(item!=null){
+            gameListener.loadGameItem(item);
+            gameListener.updateScoreView((int) ItemManager.getInstance().getCurrentScore());
+        }
+
         else
-            gameListener.onFailure("Incorrect item");
+            gameListener.onFailure("No item");
     }
 
-
-
+    /**
+     * This method will only be called when the user choose the right
+     * @param timeInSeconds
+     */
+    public void saveQuizScore(String timeInSeconds){
+        Log.d("QuizLog","time "+timeInSeconds);
+        double timeTaken= TimeUtils.timerConverter(timeInSeconds);
+        double score=GameScore.quizScoreCalculator(timeTaken);
+        ItemManager.getInstance().setCurrentScore(score);
+        ItemManager.getInstance().addAnsweredQuestions(true);
+        int correct=ItemManager.getInstance().getNoOfQuestionsAnswered();
+        int total=ItemManager.getInstance().getTotalNoOfQuestions();
+        int percentage=GameScore.percentageCalculator(total,correct);
+        ItemManager.getInstance().setPercentage(percentage);
+    }
 
 
     public void checkAnswer(String choice){
@@ -62,7 +91,7 @@ public class GameController extends Controller{
                 gameListener.highLightWrong(result);
         }
      else {
-            Log.d("DEBUG","answer is null to display");
+            Log.d("DEBUG","answer does not exist to display");
         }
 
     }
@@ -84,10 +113,6 @@ public class GameController extends Controller{
             }
         });
 
-
-
-
-
     }
 
 
@@ -96,6 +121,7 @@ public class GameController extends Controller{
         public void loadGameItem(ItemModel item);
         public void setImage(String url);
         public void loadQuizItem(Question quiz);
+        public void updateScoreView(int score);
         public void highLightCorrect();
         public void highLightWrong(String answer);
     }

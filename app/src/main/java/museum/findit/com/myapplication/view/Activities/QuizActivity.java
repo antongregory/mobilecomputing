@@ -118,21 +118,12 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
             if (intent.getAction().equals(RECEIVE_TIME)) {
                 String message = intent.getStringExtra("Quiztimer");
                 //Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                Log.v("QuizTimer:", message);
                 updateUI(message);
             }
         }
     }
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
 
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
-        {
-            return true;
-        }
-        return super.dispatchKeyEvent(event);
-    }
 
     private void initialise(){
         questionNoTextView=(TextView)findViewById(R.id.questionNoTextView);
@@ -172,30 +163,25 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     @Override
     public void onSucess(Class view) {
+
         Intent intent = new Intent(this, view);
 
         startActivity(intent);
     }
 
     @Override
-    public void onFailure(String message) {
-
-    }
+    public void onFailure(String message) {}
 
     @Override
-    public void loadGameItem(ItemModel item) {
-
-
-    }
+    public void loadGameItem(ItemModel item) { }
 
     @Override
-    public void setImage(String url) {
-
-    }
+    public void setImage(String url) {}
 
     @Override
     public void loadQuizItem(Question quiz) {
         resetButton();
+        questionNoTextView.setText(quiz.getOrderAndCount());
         questionTextView.setText(quiz.getQuestion());
         choiceA.setText(quiz.getChoiceA());
         choiceB.setText(quiz.getChoiceB());
@@ -205,9 +191,14 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     }
 
     @Override
+    public void updateScoreView(int score) {
+        scoreTextView.setText(""+score);
+    }
+
+    @Override
     public void highLightCorrect() {
         Toast.makeText(this, "right choice"+selectedChoice.getText(),Toast.LENGTH_LONG).show();
-
+        mController.saveQuizScore(quizTimerTextView.getText().toString());
         selectedChoice.setBackgroundColor(getResources().getColor(R.color.buttonColor));
         finishQuiz();
     }
@@ -283,5 +274,13 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
 
     }
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
 
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK)
+        {
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
 }
