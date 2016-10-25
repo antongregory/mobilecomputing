@@ -62,35 +62,36 @@
             android:textAlignment="center" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <Button
                 android:text="Start"
-                android:layout_marginTop="20dp"
                 android:layout_height="40dp"
                 android:id="@+id/startbtn"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:onClick="startGame"
                 android:textSize="18sp"
 
                 android:textColor="@color/textColor"
                 android:background="@color/buttonColor"
-                android:layout_width="250dp" />
+                android:layout_width="150dp" />
 
 
             <Button
                 android:text="Leave"
                 android:id="@+id/leaveBtn"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
                 android:textColor="@color/textColor"
                 android:background="@color/cancelColor"
                 android:textSize="18sp"
                 android:layout_gravity="center"
                 android:onClick="backToLogin"
+                android:layout_weight="1"
                 android:layout_height="40dp"
-                android:layout_width="250dp" />
+                android:layout_width="150dp" />
         </LinearLayout>
 
 
