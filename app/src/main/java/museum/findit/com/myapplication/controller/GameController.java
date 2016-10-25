@@ -33,6 +33,8 @@ public class GameController extends Controller{
     }
 
     public void startQuiz(){
+        ItemModel item=ItemManager.getInstance().getItem();
+        String itemDescription=item.getDescription();
         Question question=ItemManager.getInstance().loadNextQuestion();
         Player playerProfile=ItemManager.getInstance().getPlayerProfile();
         Log.d("DEBUG"," questiony"+question);
@@ -46,13 +48,18 @@ public class GameController extends Controller{
                 double score=playerProfile.getCurrentScore();
                 int percentage=playerProfile.getPercentage();
                 GameService.updateScore((int) score,percentage);
-                gameListener.onSucess(GameActiviry.class);
+
+                gameListener.onFailure(itemDescription);
+                //gameListener.onSucess(GameActiviry.class);
 
             }
 
 
     }
 
+    public void terminateQuiz(){
+        gameListener.onSucess(GameActiviry.class);
+    }
 
     public void updateItem(){
        ItemModel item= ItemManager.getInstance().getItem();

@@ -81,21 +81,18 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     }
 
 
-    public void showDescription(View vew) {
+    public void showDescription(String message) {
         stopService(new Intent(this, QuizTimerService.class));
-        String descriptionExp = "A course or document may need to use an image which would need a fairly long description to properly describe the content. In this case the recommendation is to include a short summary in the ALT tag which points to or links blind users to a long text description which fully explains the image.\n" +
-                "\n" +
-                "In most cases, the long description should be available to all users. This long description will not only assist blind users but also sighted users who may not understand a complex image.\n" +
-                "\n" +
-                "The examples below will provide examples of long description and how to place them to benefit the most users.";
-
+        String descriptionExp = message;
+        resetButton();
         new AlertDialog.Builder(this)
-                .setTitle("//Item Name")
+                .setTitle("Description")
                 .setMessage(descriptionExp)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
-                        finish();
+                        //finish();
+                        mController.terminateQuiz();
                     }
                 })
 
@@ -163,13 +160,17 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     @Override
     public void onSucess(Class view) {
 
+
         Intent intent = new Intent(this, view);
 
         startActivity(intent);
     }
 
     @Override
-    public void onFailure(String message) {}
+    public void onFailure(String message) {
+
+        showDescription(message);
+    }
 
     @Override
     public void loadGameItem(ItemModel item) { }
