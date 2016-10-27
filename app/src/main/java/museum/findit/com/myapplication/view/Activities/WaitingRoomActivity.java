@@ -43,6 +43,8 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     Button startBtn;
     Button leaveBtn;
     LinearLayout btnslayout;
+    LinearLayout waittingroomLayout;
+    ImageView imageView1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +54,16 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
          gamecode = ((MyApplication) this.getApplication()).getGameCode();
         owner = ((MyApplication) this.getApplication()).isOwner();
          btnslayout  = (LinearLayout) findViewById(R.id.buttonsLayout);
+        waittingroomLayout = (LinearLayout) findViewById(R.id.waitingroomLayout);
          startBtn = (Button) findViewById(R.id.startbtn);
         leaveBtn = (Button) findViewById(R.id.leaveBtn);
+
+        imageView1 = (ImageView) findViewById(R.id.qrCode);
 
         if(CurrentUser.isParticipant()){
 
             btnslayout.removeView(startBtn);
-            leaveBtn.getLayoutParams().height+=leaveBtn.getLayoutParams().height;
+           // leaveBtn.getLayoutParams().height+=leaveBtn.getLayoutParams().height;
             GameParticipantService.getGameStatus().addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -129,6 +134,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     private void initialise(){
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         imageView.setVisibility(View.INVISIBLE);
+        waittingroomLayout.removeView(imageView1);
         TextView description = (TextView) findViewById(R.id.info);
         description.setText("");
         description.setVisibility(View.INVISIBLE);
@@ -136,15 +142,14 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
     private void initialise(String code){
 
-        ImageView imageView1 = (ImageView) findViewById(R.id.qrCode);
+
         imageView1.setVisibility(View.VISIBLE);
         TextView description = (TextView) findViewById(R.id.info);
         description.setText(R.string.waitingInfo);
         description.setVisibility(View.VISIBLE);
-        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         try {
             Bitmap bitmap = encodeAsBitmap(code);
-            imageView.setImageBitmap(bitmap);
+            imageView1.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
