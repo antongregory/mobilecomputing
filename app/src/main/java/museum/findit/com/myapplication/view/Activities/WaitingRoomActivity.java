@@ -3,21 +3,20 @@ package museum.findit.com.myapplication.view.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -31,7 +30,6 @@ import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
 
-import static android.R.attr.width;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
@@ -42,6 +40,11 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     private Controller mController;
     String message;
     boolean owner;
+    Button startBtn;
+    Button leaveBtn;
+    LinearLayout btnslayout;
+    LinearLayout waittingroomLayout;
+    ImageView imageView1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +53,17 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
         welcomeInfo = (TextView) findViewById(R.id.welcomeTxt);
          gamecode = ((MyApplication) this.getApplication()).getGameCode();
         owner = ((MyApplication) this.getApplication()).isOwner();
+         btnslayout  = (LinearLayout) findViewById(R.id.buttonsLayout);
+        waittingroomLayout = (LinearLayout) findViewById(R.id.waitingroomLayout);
+         startBtn = (Button) findViewById(R.id.startbtn);
+        leaveBtn = (Button) findViewById(R.id.leaveBtn);
+
+        imageView1 = (ImageView) findViewById(R.id.qrCode);
 
         if(CurrentUser.isParticipant()){
-            View startButton = findViewById(R.id.startbtn);
-            startButton.setVisibility(View.INVISIBLE);
 
+            btnslayout.removeView(startBtn);
+           // leaveBtn.getLayoutParams().height+=leaveBtn.getLayoutParams().height;
             GameParticipantService.getGameStatus().addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -125,6 +134,7 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
     private void initialise(){
         ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         imageView.setVisibility(View.INVISIBLE);
+        waittingroomLayout.removeView(imageView1);
         TextView description = (TextView) findViewById(R.id.info);
         description.setText("");
         description.setVisibility(View.INVISIBLE);
@@ -132,18 +142,33 @@ public class WaitingRoomActivity extends AppCompatActivity implements Controller
 
     private void initialise(String code){
 
-        ImageView imageView1 = (ImageView) findViewById(R.id.qrCode);
+
         imageView1.setVisibility(View.VISIBLE);
         TextView description = (TextView) findViewById(R.id.info);
         description.setText(R.string.waitingInfo);
         description.setVisibility(View.VISIBLE);
-        ImageView imageView = (ImageView) findViewById(R.id.qrCode);
         try {
             Bitmap bitmap = encodeAsBitmap(code);
-            imageView.setImageBitmap(bitmap);
+            imageView1.setImageBitmap(bitmap);
         } catch (WriterException e) {
             e.printStackTrace();
         }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+        );
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) startBtn.getLayoutParams();
+        layoutParams.rightMargin += 15;
+
+        LinearLayout.LayoutParams layoutParams1 = (LinearLayout.LayoutParams) startBtn.getLayoutParams();
+        layoutParams1.leftMargin += 15;
+
+        startBtn.setLayoutParams(layoutParams);
+        leaveBtn.setLayoutParams(layoutParams1);
+
+
+
     }
 
 

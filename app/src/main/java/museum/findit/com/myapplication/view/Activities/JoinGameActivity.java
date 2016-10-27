@@ -1,21 +1,15 @@
 package museum.findit.com.myapplication.view.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-
-import android.widget.Toast;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-
-import org.w3c.dom.Text;
 
 import museum.findit.com.myapplication.Helpers.MyApplication;
 import museum.findit.com.myapplication.R;
@@ -85,7 +79,6 @@ public class JoinGameActivity extends AppCompatActivity implements Controller.Vi
             }
             else {
 
-                Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
                 String code = result.getContents();
                 ((MyApplication) this.getApplication()).setOwner(false);
 

@@ -183,12 +183,27 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
         resetButton();
         questionNoTextView.setText(quiz.getOrderAndCount());
         questionTextView.setText(quiz.getQuestion());
+        questionTextView.setTextSize(adjustTextSize(quiz.getQuestion()));
+
         choiceA.setText(quiz.getChoiceA());
+        choiceA.setTextSize(adjustTextSize(quiz.getChoiceA()));
         choiceB.setText(quiz.getChoiceB());
+        choiceB.setTextSize(adjustTextSize(quiz.getChoiceB()));
         choiceC.setText(quiz.getChoiceC());
+        choiceC.setTextSize(adjustTextSize(quiz.getChoiceC()));
         startService(new Intent(this, QuizTimerService.class));
-        Log.d("DEBUG","loading item "+quiz);
+        Log.d("DEBUG", "loading item " + quiz);
     }
+
+    public float adjustTextSize(String text){
+        Log.d("Debug", text.length()+" Length");
+        if(text.length()>60){
+            return 14;
+        }else{
+            return 20;
+        }
+    }
+    
 
     @Override
     public void updateScoreView(int score) {

@@ -3,6 +3,7 @@ package museum.findit.com.myapplication.view.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -91,19 +93,20 @@ public class LoginActivity extends AppCompatActivity implements Controller.ViewH
     public void onAnimationEnd(Animation animation) {
         if (animation == animZoomIn) {
             SpalshScreen_rLayout.startAnimation(fadeOut);
+            Log.d("DEBUG","animZoomIn");
         } else if (animation == fadeOut) {
             if (IMAGE_NUMBER == 1) {
                 IMAGE_NUMBER = 2;
                 SpalshScreen_rLayout.setBackgroundResource(R.drawable.background_two);
-                SpalshScreen_rLayout.startAnimation(fadeIn);
+                SpalshScreen_rLayout.startAnimation(animZoomIn);
             } else if (IMAGE_NUMBER == 2) {
                 IMAGE_NUMBER = 3;
                 SpalshScreen_rLayout.setBackgroundResource(R.drawable.background_three);
-                SpalshScreen_rLayout.startAnimation(fadeIn);
+                SpalshScreen_rLayout.startAnimation(animZoomIn);
             } else {
                 IMAGE_NUMBER = 1;
                 SpalshScreen_rLayout.setBackgroundResource(R.drawable.background_one);
-                SpalshScreen_rLayout.startAnimation(fadeIn);
+                SpalshScreen_rLayout.startAnimation(animZoomIn);
             }
 
         } else if (animation == fadeIn) {

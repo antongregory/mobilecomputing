@@ -76,6 +76,7 @@ public class LeaderboardUIManager {
         highlightTextView(usernameTextView);
 
         usernameTextView.setText(username);
+        usernameTextView.setTextColor(Color.parseColor("#FFFF8800"));
         row.addView(usernameTextView);
     }
 

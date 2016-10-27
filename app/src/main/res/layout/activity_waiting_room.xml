@@ -9,15 +9,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="museum.findit.com.myapplication.view.Activities.WaitingRoomActivity">
+    tools:context="museum.findit.com.myapplication.view.Activities.WaitingRoomActivity"
+    android:theme="@style/worldculture">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        android:id="@+id/waitingroomLayout">
 
         <TextView
             android:text="Welcome !"
@@ -37,11 +40,11 @@
             android:layout_marginTop="10dp" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
             android:id="@+id/qrCode"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp" />
 
         <TextView
@@ -63,34 +66,39 @@
             android:textAlignment="center" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:id="@+id/buttonsLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:text="Leave"
-                android:id="@+id/leaveBtn"
-                android:textColor="@color/textColor"
-                android:background="@color/cancelColor"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:onClick="backToLogin"
-                android:layout_height="40dp"
-                android:layout_width="150dp"
-                android:layout_marginTop="20dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:layout_marginBottom="30dp">
 
             <Button
                 android:text="Start"
                 android:layout_height="40dp"
                 android:id="@+id/startbtn"
-                android:layout_gravity="center"
+
+                android:layout_gravity="bottom"
                 android:onClick="startGame"
                 android:textSize="18sp"
 
                 android:textColor="@color/textColor"
-                android:background="@color/buttonColor"
+                android:background="@android:color/holo_orange_dark"
                 android:layout_width="150dp"
-                android:layout_marginTop="20dp" />
+                android:layout_marginRight="5dp" />
+
+            <Button
+                android:text="Leave"
+                android:id="@+id/leaveBtn"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/textColor"
+                android:background="@color/cancelColor"
+                android:textSize="18sp"
+                android:layout_gravity="bottom"
+                android:onClick="backToLogin"
+                android:layout_height="40dp"
+                android:layout_width="150dp" />
 
 
         </LinearLayout>
