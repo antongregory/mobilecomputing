@@ -38,7 +38,7 @@
                 app:srcCompat="@drawable/varldskultur" />
 
             <ImageView
-                app:srcCompat="@drawable/logo"
+                app:srcCompat="@drawable/logo2"
                 android:id="@+id/app_logo"
                 android:adjustViewBounds="false"
                 android:layout_marginTop="80dp"
