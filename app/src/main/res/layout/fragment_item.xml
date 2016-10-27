@@ -98,21 +98,43 @@
                 android:id="@+id/itemImageView"
                 android:layout_width="250dp"
                 android:layout_height="250dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center|bottom"
+            android:layout_marginBottom="30dp">
 
             <Button
                 android:text="Scan Barcode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="310dp"
+                android:layout_height="50dp"
                 android:id="@+id/button2"
-                android:layout_marginTop="30dp"
-                android:onClick="scanBarCode" />
+                android:layout_marginTop="60dp"
+                android:onClick="scanBarCode"
+                android:background="@android:color/holo_orange_dark"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="bottom|center"
+                android:layout_weight="0"
+                android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
             <Button
-                android:text="finish*"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="finish"
+                android:layout_width="310dp"
+                android:layout_height="50dp"
                 android:id="@+id/button8"
-                android:onClick="finish" />
+                android:onClick="finish"
+                android:background="@android:color/holo_orange_dark"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="bottom|center"
+                android:layout_weight="0"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:layout_marginBottom="30dp" />
+        </LinearLayout>
 
         </LinearLayout>
 
