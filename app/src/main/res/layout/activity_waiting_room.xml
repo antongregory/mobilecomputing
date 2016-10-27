@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
             android:id="@+id/qrCode"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp" />
 
         <TextView
@@ -68,7 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/buttonsLayout">
 
             <Button
                 android:text="Start"
