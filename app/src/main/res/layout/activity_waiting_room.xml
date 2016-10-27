@@ -38,8 +38,8 @@
             android:layout_marginTop="10dp" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
             android:id="@+id/qrCode"
             android:layout_marginTop="20dp"
@@ -67,9 +67,9 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/buttonsLayout">
+            android:id="@+id/buttonsLayout"
+            android:layout_marginTop="15dp">
 
             <Button
                 android:text="Start"
