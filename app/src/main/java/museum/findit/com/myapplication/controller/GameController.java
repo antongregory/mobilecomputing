@@ -77,13 +77,13 @@ public class GameController extends Controller{
      * This method will only be called when the user choose the right
      * @param timeInSeconds
      */
-    public void saveQuizScore(String timeInSeconds){
+    public void saveQuizScore(String timeInSeconds,boolean answered){
         Log.d("QuizLog","time "+timeInSeconds);
         double timeTaken= TimeUtils.timerConverter(timeInSeconds);
         double score=GameScore.quizScoreCalculator(timeTaken);
         Player playerProfile=ItemManager.getInstance().getPlayerProfile();
         playerProfile.setCurrentScore(score);
-        ItemManager.getInstance().addAnsweredQuestions(true);
+        ItemManager.getInstance().addAnsweredQuestions(answered);
         int correct=playerProfile.getNoOfQuestionsAnswered();
         int total=playerProfile.getTotalNoOfQuestions();
         int percentage=GameScore.percentageCalculator(total,correct);

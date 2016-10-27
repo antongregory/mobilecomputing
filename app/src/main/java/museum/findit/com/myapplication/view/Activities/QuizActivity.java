@@ -198,7 +198,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     @Override
     public void highLightCorrect() {
 
-        mController.saveQuizScore(quizTimerTextView.getText().toString());
+        mController.saveQuizScore(quizTimerTextView.getText().toString(),true);
         selectedChoice.setBackgroundColor(getResources().getColor(R.color.buttonColor));
         finishQuiz();
     }
@@ -207,6 +207,7 @@ public class QuizActivity extends AppCompatActivity implements GameController.Ga
     public void highLightWrong(String answer) {
 
         int buttonId=findRightButton( answer);
+        mController.saveQuizScore(quizTimerTextView.getText().toString(),false);
         switch(buttonId) {
             case R.id.choiceA:
                 choiceA.startAnimation(mAnimation);
