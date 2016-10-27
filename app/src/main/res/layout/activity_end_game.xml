@@ -26,7 +26,8 @@
             android:textStyle="normal|bold"
             android:textSize="30sp"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -49,10 +50,11 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView15"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:textStyle="normal|bold"
                     android:textAllCaps="false"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
                 <TextView
                     android:text="Score"
@@ -60,10 +62,11 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView14"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:textStyle="normal|bold"
                     android:textAllCaps="false"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
                 <TextView
                     android:text="Correct"
@@ -71,10 +74,11 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView13"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:textSize="20sp"
                     android:textStyle="normal|bold"
                     android:textAllCaps="false"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused" />
             </TableRow>
 
         </TableLayout>
