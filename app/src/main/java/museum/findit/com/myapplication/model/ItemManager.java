@@ -57,10 +57,12 @@ public class ItemManager implements Manager, QuestionHandler {
             Collections.shuffle(completeCollection, new Random(seed));
         else
             Collections.shuffle(completeCollection, new Random(5));
-        Log.d("DEBUG", "game seed" + seed);
+
         itemCollection = new ArrayList<ItemModel>(completeCollection.subList(0, 5));
         removeNullFromList();
-        Collections.shuffle(itemcollection);
+
+        Collections.shuffle(itemCollection);
+
         playerProfile.clear();
 
 
