@@ -93,12 +93,23 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <ImageView
-                app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
-                android:id="@+id/itemImageView"
+            <RelativeLayout
                 android:layout_width="250dp"
                 android:layout_height="250dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="20dp">
+
+                <pl.droidsonroids.gif.GifTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/loading"
+                    android:layout_margin="50dp" />
+
+                <ImageView
+                    android:id="@+id/itemImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="10dp" />
+            </RelativeLayout>
 
             <Button
                 android:text="Scan Barcode"
