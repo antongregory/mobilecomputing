@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
@@ -33,6 +34,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
 
     private BroadcastReceiver bReceiver;
     LocalBroadcastManager bManager;
+    View parentLayout;
 
 
     private  Controller controller;
@@ -46,6 +48,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
         setContentView(R.layout.activity_game);
         controller=new Controller(this);
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        parentLayout=viewPager.getRootView();
 
 
 
@@ -160,7 +163,7 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+                
                 controller.compareBarCode(result.getContents());
             }
             else {
@@ -211,6 +214,16 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
 
     @Override
     public void onFailure(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar
+                .make(parentLayout, "In correct item scanned", Snackbar.LENGTH_LONG)
+                .setAction("SCAN AGAIN", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        scanBarCode(view);
+                    }
+                }).setActionTextColor(getResources().getColor(android.R.color.holo_blue_bright));
+        snackbar.show();
+
     }
 }
