@@ -60,7 +60,7 @@ public class ItemManager implements Manager, QuestionHandler {
         Log.d("DEBUG", "game seed" + seed);
         itemCollection = new ArrayList<ItemModel>(completeCollection.subList(0, 5));
         removeNullFromList();
-        Collections.shuffle(completeCollection);
+        Collections.shuffle(itemcollection);
         playerProfile.clear();
 
 
