@@ -59,10 +59,20 @@ public class ItemManager implements Manager, QuestionHandler {
             Collections.shuffle(completeCollection, new Random(5));
         Log.d("DEBUG", "game seed" + seed);
         itemCollection = new ArrayList<ItemModel>(completeCollection.subList(0, 5));
-        
+        removeNullFromList();
+        Collections.shuffle(itemcollection);
         playerProfile.clear();
 
 
+    }
+
+    private void removeNullFromList(){
+        for(int i =0;i<itemCollection.size();i++){
+            if (itemCollection.get(i)==null){
+                itemCollection.remove(i);
+            }
+
+        }
     }
 
     public void savePlayerProfile(){
@@ -121,6 +131,8 @@ public class ItemManager implements Manager, QuestionHandler {
     public ItemModel getItem() {
 
         if (playerProfile.getCurrentItemIndex() < count()) {
+
+
             item = itemCollection.get(playerProfile.getCurrentItemIndex());
 
             item.setOrderAndCount(playerProfile.getCurrentItemIndex() + 1 + "/" + count());
