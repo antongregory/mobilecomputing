@@ -3,7 +3,6 @@ package museum.findit.com.myapplication.view.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,12 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -34,7 +30,6 @@ import museum.findit.com.myapplication.WebService.GameService;
 import museum.findit.com.myapplication.controller.Controller;
 import museum.findit.com.myapplication.model.CurrentUser;
 
-import static android.R.attr.width;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 

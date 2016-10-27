@@ -164,7 +164,6 @@ public class GameActiviry extends AppCompatActivity implements Controller.ViewHa
                 controller.compareBarCode(result.getContents());
             }
             else {
-                Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
                 controller.compareBarCode(result.getContents());
             }
         }
