@@ -8,4 +8,5 @@
     <color name="cancelColor">#a11f1f</color>
     <color name="defaultButtonColor">#a9a9a9</color>
     <color name="primary_text">#deffffff</color>
+    <color name="background">#000000</color>
 </resources>
