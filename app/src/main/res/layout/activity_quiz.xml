@@ -15,9 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -47,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="3/5"
-                    android:id="@+id/itemTextView" />
+                    android:id="@+id/questionNoTextView" />
             </LinearLayout>
 
             <LinearLayout
@@ -90,10 +91,10 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:text="MM:SS"
+                    android:text="00:00"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/timeTextView" />
+                    android:id="@+id/timeTextViewQuiz" />
             </LinearLayout>
         </LinearLayout>
 
@@ -101,44 +102,52 @@
             android:text="Who use this boat?"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/quizTextView"
+            android:id="@+id/questionTextView"
             android:textAlignment="center"
             android:textStyle="normal|bold"
             android:textSize="24sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="50dp"
+            android:layout_weight="0.23"
+            android:layout_marginBottom="50dp" />
 
         <Button
             android:text="A: Afghan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
             android:background="@android:color/holo_orange_dark"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:id="@+id/choiceA"
+            android:onClick="selectedChoice"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
         <Button
             android:text="B: Mexican"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button4"
-            android:layout_margin="15dp"
-            android:background="@android:color/holo_blue_dark"
-            android:textSize="20sp" />
+            android:id="@+id/choiceB"
+            android:background="@android:color/holo_orange_dark"
+            android:textSize="20sp"
+            android:onClick="selectedChoice"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:text="C: Swedish"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button5"
-            android:layout_margin="15dp"
-            android:background="@android:color/holo_purple"
-            android:textSize="20sp" />
+            android:id="@+id/choiceC"
+            android:background="@android:color/holo_orange_dark"
+            android:textSize="20sp"
+            android:onClick="selectedChoice"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:layout_marginTop="10dp" />
 
 
     </LinearLayout>

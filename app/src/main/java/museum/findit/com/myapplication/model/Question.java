@@ -6,7 +6,63 @@ package museum.findit.com.myapplication.model;
 
 public class Question {
 
+
+    public String getOrderAndCount() {
+        return orderAndCount;
+    }
+
+    public void setOrderAndCount(String orderAndCount) {
+        this.orderAndCount = orderAndCount;
+    }
+
+    /*
+
+        Handles the actions corresponding to an item
+
+        */
+    String orderAndCount;
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
     String question;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public String getChoiceA() {
+        return choiceA;
+    }
+
+    public void setChoiceA(String choiceA) {
+        this.choiceA = choiceA;
+    }
+
+    public String getChoiceB() {
+        return choiceB;
+    }
+
+    public void setChoiceB(String choiceB) {
+        this.choiceB = choiceB;
+    }
+
+    public String getChoiceC() {
+        return choiceC;
+    }
+
+    public void setChoiceC(String choiceC) {
+        this.choiceC = choiceC;
+    }
+
     String answer;
     String choiceA;
     String choiceB;

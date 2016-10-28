@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import museum.findit.com.myapplication.model.ItemModel;
 import museum.findit.com.myapplication.view.fragment.ItemFragment;
 import museum.findit.com.myapplication.view.fragment.LeaderboardFragment;
 
@@ -16,9 +17,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     int mNumOfTabs;
 
+
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
+
     }
 
     @Override
@@ -41,4 +44,6 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mNumOfTabs;
     }
+
+
 }

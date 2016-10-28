@@ -7,11 +7,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-    <activity android:name=".view.Activities.LoginActivity"
+        android:theme="@style/AppTheme"
+        android:name=".Helpers.MyApplication"
+        >
+        <activity
+            android:name=".view.Activities.LoginActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar.Black">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.Activities.WaitingRoomActivity" />
+        <activity android:name=".view.Activities.WaitingRoomActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+
         <activity
             android:name=".view.Activities.GameActiviry"
             android:theme="@style/AppTheme.NoActionBar">
@@ -32,8 +37,33 @@
         <activity android:name=".view.Activities.QuizActivity" />
         <activity
             android:name=".view.Activities.JoinGameActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Activities.EndGameActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
+        <service
+            android:name=".controller.TimerService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver android:name=".view.Activities.GameActiviry$timerReceiver">
+            <intent-filter>
+                <action android:name="museum.findit.com.myapplication"></action>
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".view.Activities.QuizActivity$quizTimerReceiver">
+            <intent-filter>
+                <action android:name="museum.findit.com.myapplication.quiz"></action>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".controller.QuizTimerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
