@@ -5,6 +5,7 @@ A treasure hunt and quiz game to make learning fun in museum.
 We collaborate with Världskulturmuseet (World Culture Museum) in Gothenburg, Sweden.
 
 Update 0.2:
+
 1. Player can easily create a game and QR code will be automatically generated
 2. Other players can join by scanning QR code from the game owner
 3. Search for the item shown in the game
